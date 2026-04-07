@@ -13,6 +13,7 @@ Route::get('/artikel/{slug}', [HomeController::class, 'artikelDetail'])->name('a
 Route::get('/kegiatan', [HomeController::class, 'kegiatan'])->name('kegiatan.index');
 Route::get('/kegiatan/{id}', [HomeController::class, 'kegiatanDetail'])->name('kegiatan.detail');
 Route::get('/tentang', [HomeController::class, 'tentang'])->name('tentang');
+Route::get('/leaderboard', [\App\Http\Controllers\MemberController::class, 'leaderboard'])->name('leaderboard');
 
 // Admin Login Route
 Route::get('/auth', function () {
@@ -32,7 +33,7 @@ Route::post('/auth', function (\Illuminate\Http\Request $request) {
         'password' => $request->password
     ];
 
-    if (auth()->attempt($credentials, $request->filled('remember'))) {
+    if (\Illuminate\Support\Facades\Auth::attempt($credentials, $request->filled('remember'))) {
         $request->session()->regenerate();
         return redirect()->intended(route('admin.dashboard'));
     }
@@ -43,7 +44,7 @@ Route::post('/auth', function (\Illuminate\Http\Request $request) {
 })->middleware('guest');
 
 Route::post('/logout', function (\Illuminate\Http\Request $request) {
-    auth()->logout();
+    \Illuminate\Support\Facades\Auth::logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
     return redirect()->route('home');
@@ -62,6 +63,7 @@ Route::middleware('anggota.auth')->prefix('anggota')->name('anggota.')->group(fu
     Route::get('/riwayat', [\App\Http\Controllers\AnggotaDashboardController::class, 'riwayatKegiatan'])->name('riwayat');
     Route::get('/qr-card', [\App\Http\Controllers\AnggotaDashboardController::class, 'generateQRCard'])->name('qr-card');
     Route::get('/export-profile', [\App\Http\Controllers\AnggotaDashboardController::class, 'exportProfile'])->name('export-profile');
+    Route::get('/digital-id', [\App\Http\Controllers\MemberController::class, 'generateCard'])->name('digital-id');
     Route::post('/logout', [\App\Http\Controllers\AnggotaDashboardController::class, 'logout'])->name('logout');
 });
 
@@ -99,6 +101,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     // QR Scanner & Absensi
     Route::get('/kegiatan/scan-qr', [\App\Http\Controllers\PendaftaranKegiatanController::class, 'scanQR'])->name('kegiatan.scan');
     Route::post('/kegiatan/process-qr', [\App\Http\Controllers\PendaftaranKegiatanController::class, 'processQR'])->name('kegiatan.process-qr');
+    Route::post('/scan-attendance', [\App\Http\Controllers\MemberController::class, 'scanAttendance'])->name('scan-attendance');
     Route::get('/kegiatan/{id}/export-absensi', [\App\Http\Controllers\PendaftaranKegiatanController::class, 'exportAbsensi'])->name('kegiatan.export-absensi');
 
     // Program
