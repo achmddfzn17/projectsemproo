@@ -27,11 +27,7 @@ class Anggota extends Authenticatable
         'pendidikan_terakhir',
         'pekerjaan',
         'status',
-        'uuid',
-        'points',
     ];
-
-    protected $appends = ['badge'];
 
     protected $hidden = [
         'password',
@@ -45,16 +41,6 @@ class Anggota extends Authenticatable
     public function getUmurAttribute()
     {
         return $this->tanggal_lahir->age;
-    }
-
-    public function getBadgeAttribute()
-    {
-        if ($this->points >= 300) {
-            return 'Elite Leader';
-        } elseif ($this->points >= 100) {
-            return 'Active Member';
-        }
-        return 'Member';
     }
 
     public function pendaftaranKegiatan()

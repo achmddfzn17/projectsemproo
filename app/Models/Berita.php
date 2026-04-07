@@ -24,6 +24,8 @@ class Berita extends Model
 
     protected $casts = [
         'is_published' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     public function user()
@@ -34,7 +36,7 @@ class Berita extends Model
     protected static function boot()
     {
         parent::boot();
-        
+
         static::creating(function ($berita) {
             if (empty($berita->slug)) {
                 $berita->slug = Str::slug($berita->judul);

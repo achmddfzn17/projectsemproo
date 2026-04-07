@@ -1,0 +1,426 @@
+/**
+ * ==========================================
+ * LAYOUT WRAPPER - Main Layout Component
+ * Tailwind CSS Utility Classes
+ * ==========================================
+ * 
+ * Modern Youth Organization Aesthetic:
+ * - Professional yet energetic
+ * - Bold Primary (Electric Blue) + Clean Neutral (Slate)
+ * - 4.5:1 contrast ratio for accessibility
+ * - Plus Jakarta Sans typography
+ * 
+ * Usage: Apply these classes to the main layout wrapper
+ */
+
+/* ================================
+   BASE LAYOUT WRAPPER
+   ================================ */
+
+/* Full Page Layout */
+.layout-wrapper {
+  @apply min-h-screen bg-slate-50;
+}
+
+/* ================================
+   NAVBAR (Modern Glass Effect)
+   ================================ */
+.navbar-glass {
+  @apply bg-white/80 backdrop-blur-xl border-b border-white/20 shadow-lg sticky top-0 z-50;
+}
+
+.navbar-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.navbar-inner {
+  @apply flex items-center justify-between h-20;
+}
+
+/* Logo Section */
+.navbar-brand {
+  @apply flex items-center space-x-3 group;
+}
+
+.navbar-logo {
+  @apply w-12 h-12 rounded-2xl overflow-hidden shadow-lg transform group-hover:scale-110 transition-all duration-300;
+}
+
+.navbar-brand-text {
+  @apply block;
+}
+
+.navbar-brand-title {
+  @apply text-slate-800 font-extrabold text-xl;
+}
+
+.navbar-brand-subtitle {
+  @apply text-xs text-blue-600 font-semibold;
+}
+
+/* Navigation Links */
+.navbar-nav {
+  @apply hidden md:flex items-center space-x-2;
+}
+
+.navbar-link {
+  @apply px-4 py-2 rounded-xl font-semibold text-slate-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200;
+}
+
+.navbar-link-active {
+  @apply bg-blue-50 text-blue-600;
+}
+
+/* Mobile Menu Button */
+.navbar-mobile-btn {
+  @apply md:hidden p-2 rounded-lg text-slate-700 hover:text-blue-600 hover:bg-blue-50 transition-all;
+}
+
+/* ================================
+   HERO SECTION
+   ================================ */
+.hero-section {
+  @apply relative min-h-[80vh] flex items-center overflow-hidden;
+}
+
+.hero-bg-gradient {
+  @apply absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-slate-50;
+}
+
+.hero-bg-pattern {
+  @apply absolute inset-0 opacity-[0.03];
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233b82f6' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.hero-content {
+  @apply relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20;
+}
+
+.hero-grid {
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-12 items-center;
+}
+
+.hero-badge {
+  @apply inline-flex items-center bg-blue-100/80 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-blue-200/50;
+}
+
+.hero-badge-dot {
+  @apply w-2 h-2 bg-blue-500 rounded-full mr-2 animate-pulse;
+}
+
+.hero-badge-text {
+  @apply text-sm font-bold text-blue-700;
+}
+
+.hero-title {
+  @apply text-5xl md:text-6xl lg:text-7xl font-black text-slate-800 leading-tight;
+}
+
+.hero-title-accent {
+  @apply text-blue-600;
+}
+
+.hero-description {
+  @apply text-xl text-slate-600 leading-relaxed mb-8;
+}
+
+.hero-buttons {
+  @apply flex flex-col sm:flex-row gap-4;
+}
+
+.hero-btn-primary {
+  @apply bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl hover:scale-105;
+}
+
+.hero-btn-secondary {
+  @apply bg-white text-blue-600 px-8 py-4 rounded-2xl font-bold border-2 border-blue-200 hover:bg-blue-50 transition-all shadow-md hover:shadow-lg;
+}
+
+/* Hero Stats */
+.hero-stats {
+  @apply grid grid-cols-3 gap-6 mt-12;
+}
+
+.hero-stat {
+  @apply text-center lg:text-left;
+}
+
+.hero-stat-number {
+  @apply text-4xl md:text-5xl font-black text-blue-600;
+}
+
+.hero-stat-label {
+  @apply text-sm text-slate-500 font-medium;
+}
+
+/* ================================
+   CONTENT SECTIONS
+   ================================ */
+.section {
+  @apply py-16 md:py-20;
+}
+
+.section-white {
+  @apply bg-white;
+}
+
+.section-slate {
+  @apply bg-slate-50;
+}
+
+.section-blue {
+  @apply bg-gradient-to-br from-blue-500 to-blue-600;
+}
+
+.section-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.section-header {
+  @apply text-center mb-12;
+}
+
+.section-title {
+  @apply text-4xl font-black text-slate-800 mb-4;
+}
+
+.section-title-accent {
+  @apply text-blue-600;
+}
+
+.section-subtitle {
+  @apply text-xl text-slate-600;
+}
+
+/* ================================
+   GRID LAYOUTS
+   ================================ */
+
+/* Card Grid - 4 columns on desktop */
+.grid-cards-4 {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6;
+}
+
+/* Card Grid - 3 columns on desktop */
+.grid-cards-3 {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+}
+
+/* Card Grid - 2 columns on desktop */
+.grid-cards-2 {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+}
+
+/* ================================
+   SIDEBAR (Admin Panel)
+   ================================ */
+.sidebar {
+  @apply w-64 bg-white border-r border-slate-200 shadow-xl fixed h-full left-0 top-0 z-40;
+}
+
+.sidebar-header {
+  @apply p-6 border-b border-slate-100;
+}
+
+.sidebar-logo {
+  @apply flex items-center space-x-3;
+}
+
+.sidebar-logo-img {
+  @apply w-12 h-12 rounded-xl overflow-hidden shadow-lg;
+}
+
+.sidebar-logo-text {
+  @apply font-bold text-lg text-slate-800;
+}
+
+.sidebar-logo-subtitle {
+  @apply text-xs text-slate-500;
+}
+
+.sidebar-nav {
+  @apply p-4 space-y-1;
+}
+
+.sidebar-link {
+  @apply flex items-center px-4 py-3 rounded-xl text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-all;
+}
+
+.sidebar-link-active {
+  @apply bg-blue-600 text-white shadow-lg;
+}
+
+.sidebar-icon {
+  @apply w-5 h-5 mr-3;
+}
+
+.sidebar-text {
+  @apply font-semibold;
+}
+
+/* ================================
+   MAIN CONTENT AREA
+   ================================ */
+.main-content {
+  @apply ml-64 min-h-screen p-8;
+}
+
+.main-header {
+  @apply bg-white border-b border-slate-200 shadow-sm sticky top-0 z-10 px-8 py-5;
+}
+
+.main-header-content {
+  @apply flex justify-between items-center;
+}
+
+.main-header-title {
+  @apply text-2xl font-bold text-slate-800;
+}
+
+.main-header-subtitle {
+  @apply text-sm text-slate-500 mt-1;
+}
+
+.main-body {
+  @apply p-8;
+}
+
+/* ================================
+   FOOTER
+   ================================ */
+.footer {
+  @apply bg-slate-900 text-white mt-20;
+}
+
+.footer-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16;
+}
+
+.footer-grid {
+  @apply grid grid-cols-1 md:grid-cols-4 gap-12;
+}
+
+.footer-brand {
+  @apply md:col-span-2;
+}
+
+.footer-logo {
+  @apply flex items-center space-x-3 mb-6;
+}
+
+.footer-logo-img {
+  @apply w-14 h-14 rounded-2xl bg-white p-1;
+}
+
+.footer-title {
+  @apply text-2xl font-extrabold;
+}
+
+.footer-subtitle {
+  @apply text-sm text-blue-300;
+}
+
+.footer-description {
+  @apply text-slate-300 leading-relaxed mb-6;
+}
+
+.footer-social {
+  @apply flex space-x-4;
+}
+
+.footer-social-link {
+  @apply w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-blue-600 transition-all hover:scale-110;
+}
+
+.footer-heading {
+  @apply text-xl font-bold mb-6 text-blue-400;
+}
+
+.footer-links {
+  @apply space-y-3;
+}
+
+.footer-link {
+  @apply text-slate-300 hover:text-blue-400 transition flex items-center;
+}
+
+.footer-contact {
+  @apply space-y-4;
+}
+
+.footer-contact-item {
+  @apply flex items-start;
+}
+
+.footer-contact-icon {
+  @apply w-5 h-5 text-blue-400 mt-1 mr-3;
+}
+
+.footer-contact-text {
+  @apply text-slate-300;
+}
+
+.footer-bottom {
+  @apply border-t border-white/10 pt-8 mt-12 flex flex-col md:flex-row justify-between items-center;
+}
+
+.footer-copyright {
+  @apply text-slate-400 text-sm mb-4 md:mb-0;
+}
+
+.footer-legal {
+  @apply flex space-x-6 text-sm;
+}
+
+.footer-legal-link {
+  @apply text-slate-400 hover:text-blue-400 transition;
+}
+
+/* ================================
+   RESPONSIVE BREAKPOINTS
+   ================================ */
+
+/* Mobile (< 640px) */
+@media (max-width: 639px) {
+  .hero-title {
+    @apply text-4xl;
+  }
+  
+  .hero-buttons {
+    @apply flex-col;
+  }
+  
+  .hero-btn-primary,
+  .hero-btn-secondary {
+    @apply w-full text-center;
+  }
+  
+  .hero-stats {
+    @apply grid-cols-1 gap-4;
+  }
+}
+
+/* Tablet (640px - 1024px) */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .hero-title {
+    @apply text-5xl;
+  }
+}
+
+/* Desktop (> 1024px) */
+@media (min-width: 1024px) {
+  /* Already optimized for desktop */
+}
+
+/* ================================
+   DARK MODE SUPPORT (Future)
+   ================================ */
+@media (prefers-color-scheme: dark) {
+  /* 
+   * Uncomment when dark mode is needed
+   * 
+   * .layout-wrapper {
+   *   @apply bg-slate-900;
+   * }
+   */
+}

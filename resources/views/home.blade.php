@@ -125,10 +125,10 @@
                 </div>
                 <div class="p-6">
                     <time class="text-sm text-gray-500 mb-2 block">
-                        {{ $berita->created_at->diffForHumans() }}
+                        {{ $berita->created_at ? $berita->created_at->diffForHumans() : '-' }}
                     </time>
                     <h3 class="text-lg font-bold text-gray-800 mb-3 line-clamp-2">{{ $berita->judul }}</h3>
-                    <p class="text-gray-600 mb-4 line-clamp-2">{{ Str::limit(strip_tags($berita->konten), 100) }}</p>
+                    <p class="text-gray-600 mb-4 line-clamp-2">{{ Str::limit(strip_tags($berita->konten ?? ''), 100) }}</p>
                     <a href="{{ route('berita.detail', $berita->slug) }}" 
                        class="text-blue-500 font-bold hover:text-blue-600 inline-flex items-center">
                         Baca Selengkapnya →
@@ -181,7 +181,7 @@
                 <div class="p-5">
                     <h3 class="text-base font-bold text-gray-800 mb-2 line-clamp-2">{{ $kegiatan->nama_kegiatan }}</h3>
                     <time class="text-sm text-gray-600 mb-3 block">
-                        📅 {{ $kegiatan->tanggal_mulai->format('d M Y') }}
+                        📅 {{ $kegiatan->tanggal_mulai ? $kegiatan->tanggal_mulai->format('d M Y') : '-' }}
                     </time>
                     <a href="{{ route('kegiatan.detail', $kegiatan->id) }}" 
                        class="text-blue-500 font-bold hover:text-blue-600 text-sm inline-flex items-center">
