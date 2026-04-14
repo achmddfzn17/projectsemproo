@@ -3,17 +3,20 @@
 @section('title', 'Data Anggota')
 
 @section('content')
-<div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-    <div>
-        <h1 class="text-3xl font-extrabold text-gray-800">Data Anggota</h1>
-        <p class="text-sm text-gray-600 mt-1">Kelola data anggota Karang Taruna</p>
+<!-- Header -->
+<div class="mb-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white shadow-xl">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+            <h1 class="text-3xl font-extrabold mb-1 flex items-center gap-2"><iconify-icon icon="mdi:account-group" class="text-2xl"></iconify-icon> Data Anggota</h1>
+            <p class="text-blue-100">Kelola data anggota Karang Taruna</p>
+        </div>
+        <a href="{{ route('admin.anggota.create') }}" class="bg-white text-blue-700 hover:bg-blue-50 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all inline-flex items-center gap-2 shadow-lg">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+            </svg>
+            Tambah Anggota
+        </a>
     </div>
-    <a href="{{ route('admin.anggota.create') }}" class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl font-semibold inline-flex items-center">
-        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-        </svg>
-        Tambah Anggota
-    </a>
 </div>
 
 <!-- Mini Stats -->
@@ -97,14 +100,14 @@
                     </td>
                     <td class="py-4 px-6">
                         <div class="flex justify-center space-x-2">
-                            <a href="{{ route('admin.anggota.edit', $item->id) }}" class="bg-blue-50 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-100 transition font-semibold text-sm">
-                                Edit
+                            <a href="{{ route('admin.anggota.edit', $item->id) }}" class="bg-blue-50 text-blue-600 px-4 py-2 rounded-xl hover:bg-blue-100 transition font-semibold text-sm inline-flex items-center gap-1">
+                                <iconify-icon icon="mdi:pencil" class="text-sm"></iconify-icon> Edit
                             </a>
-                            <form method="POST" action="{{ route('admin.anggota.destroy', $item->id) }}" onsubmit="return confirm('Yakin ingin menghapus anggota ini?')">
+                            <form id="delete-form-{{ $item->id }}" method="POST" action="{{ route('admin.anggota.destroy', $item->id) }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="bg-blue-50 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-100 transition font-semibold text-sm border border-blue-200">
-                                    Hapus
+                                <button type="button" onclick="if(confirm('Yakin ingin menghapus anggota ini?')) document.getElementById('delete-form-{{ $item->id }}').submit();" class="bg-red-50 text-red-600 px-4 py-2 rounded-xl hover:bg-red-100 transition font-semibold text-sm border border-red-200 inline-flex items-center gap-1">
+                                    <iconify-icon icon="mdi:trash-can" class="text-sm"></iconify-icon> Hapus
                                 </button>
                             </form>
                         </div>
@@ -114,9 +117,7 @@
                 <tr>
                     <td colspan="7" class="text-center py-16">
                         <div class="flex flex-col items-center">
-                            <svg class="w-20 h-20 text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
+                            <iconify-icon icon="mdi:account-group-outline" class="text-6xl text-gray-300 mb-4"></iconify-icon>
                             <p class="text-gray-500 font-semibold text-lg">Belum ada data anggota</p>
                             <p class="text-gray-400 text-sm mt-1">Klik tombol "Tambah Anggota" untuk menambahkan data</p>
                         </div>

@@ -137,7 +137,7 @@
             <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-6 border-2 border-purple-200 mb-8">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">📝 Pendaftaran Peserta</h3>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2 flex items-center gap-2"><iconify-icon icon="mdi:clipboard-text" class="text-blue-500"></iconify-icon> Pendaftaran Peserta</h3>
                         <div class="flex items-center space-x-4">
                             <div>
                                 <p class="text-sm text-gray-600">Kuota Tersedia</p>
@@ -147,19 +147,19 @@
                             <div>
                                 <p class="text-sm text-gray-600">Status Pendaftaran</p>
                                 @if($kegiatan->is_pendaftaran_open && !$kegiatan->isFull())
-                                <p class="text-lg font-bold text-green-600">✅ Dibuka</p>
+                                <p class="text-lg font-bold text-green-600 flex items-center gap-1"><iconify-icon icon="mdi:check" class="text-green-500"></iconify-icon> Dibuka</p>
                                 @elseif($kegiatan->isFull())
-                                <p class="text-lg font-bold text-red-600">❌ Penuh</p>
+                                <p class="text-lg font-bold text-red-600 flex items-center gap-1"><iconify-icon icon="mdi:close" class="text-red-500"></iconify-icon> Penuh</p>
                                 @else
-                                <p class="text-lg font-bold text-gray-600">❌ Ditutup</p>
+                                <p class="text-lg font-bold text-gray-600 flex items-center gap-1"><iconify-icon icon="mdi:close" class="text-gray-500"></iconify-icon> Ditutup</p>
                                 @endif
                             </div>
                         </div>
                     </div>
                     @if($kegiatan->is_pendaftaran_open && !$kegiatan->isFull())
                     <a href="{{ route('kegiatan.daftar', $kegiatan->id) }}" 
-                       class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg font-bold text-lg">
-                        📝 Daftar Sekarang
+                       class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg font-bold text-lg flex items-center gap-2">
+                        <iconify-icon icon="mdi:clipboard-text"></iconify-icon> Daftar Sekarang
                     </a>
                     @elseif($kegiatan->isFull())
                     <button disabled 

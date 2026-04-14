@@ -7,15 +7,15 @@
 <div class="mb-8 bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-8 text-white shadow-xl">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-            <h1 class="text-4xl font-extrabold mb-2">❤️ Kas Keluar</h1>
+            <h1 class="text-4xl font-extrabold mb-2 flex items-center gap-2"><iconify-icon icon="mdi:cash-minus" class="text-2xl"></iconify-icon> Kas Keluar</h1>
             <p class="text-red-100 text-lg">Kelola pengeluaran keuangan Karang Taruna</p>
         </div>
         <div class="flex gap-2">
             <a href="{{ route('admin.keuangan.index') }}" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-xl px-4 py-2 text-sm font-semibold transition-all">
                 ← Dashboard
             </a>
-            <a href="{{ route('admin.keuangan.laporan') }}" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-xl px-4 py-2 text-sm font-semibold transition-all">
-                📊 Laporan
+            <a href="{{ route('admin.keuangan.laporan') }}" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-xl px-4 py-2 text-sm font-semibold transition-all flex items-center gap-1">
+                <iconify-icon icon="mdi:chart-bar"></iconify-icon> Laporan
             </a>
         </div>
     </div>
@@ -25,7 +25,7 @@
     <!-- Form Tambah -->
     <div class="lg:col-span-1">
         <div class="bg-white rounded-2xl shadow-lg border border-red-100 p-6 sticky top-6">
-            <h2 class="text-xl font-bold text-gray-800 mb-6">➖ Tambah Kas Keluar</h2>
+            <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2"><iconify-icon icon="mdi:minus-circle" class="text-red-500"></iconify-icon> Tambah Kas Keluar</h2>
             
             <form action="{{ route('admin.keuangan.store-keluar') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -93,14 +93,14 @@
                     </div>
                 </div>
 
-                <button type="submit" class="w-full mt-6 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-3 px-6 rounded-xl transition-all transform hover:-translate-y-1 shadow-lg">
-                    💾 Simpan Transaksi
+                <button type="submit" class="w-full mt-6 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-3 px-6 rounded-xl transition-all transform hover:-translate-y-1 shadow-lg flex items-center justify-center gap-2">
+                    <iconify-icon icon="mdi:content-save" class="text-lg"></iconify-icon> Simpan Transaksi
                 </button>
             </form>
 
             <!-- Quick Add Kategori -->
             <div class="mt-6 pt-6 border-t border-gray-200">
-                <h3 class="text-sm font-semibold text-gray-700 mb-3">⚡ Quick Add Kategori</h3>
+                <h3 class="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-1"><iconify-icon icon="mdi:flash" class="text-yellow-500"></iconify-icon> Quick Add Kategori</h3>
                 <form action="{{ route('admin.keuangan.kategori.store') }}" method="POST" class="flex gap-2">
                     @csrf
                     <input type="hidden" name="jenis" value="keluar">
@@ -119,9 +119,9 @@
         <div class="bg-white rounded-2xl shadow-lg border border-red-100">
             <div class="p-6 border-b border-red-100">
                 <div class="flex items-center justify-between">
-                    <h2 class="text-xl font-bold text-gray-800">📋 Daftar Kas Keluar</h2>
-                    <a href="{{ route('admin.keuangan.export-pdf', ['jenis' => 'keluar']) }}" class="bg-red-100 text-red-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-200 transition-all">
-                        📥 Export PDF
+                    <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2"><iconify-icon icon="mdi:format-list-bulleted" class="text-red-500"></iconify-icon> Daftar Kas Keluar</h2>
+                    <a href="{{ route('admin.keuangan.export-pdf', ['jenis' => 'keluar']) }}" class="bg-red-100 text-red-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-200 transition-all flex items-center gap-1">
+                        <iconify-icon icon="mdi:file-download"></iconify-icon> Export PDF
                     </a>
                 </div>
             </div>
@@ -178,14 +178,12 @@
                                             </svg>
                                         </a>
                                         @endif
-                                        <form action="{{ route('admin.keuangan.destroy', $item->id) }}" method="POST" 
-                                            onsubmit="return confirm('Yakin hapus transaksi ini?')">
+                                        <form id="delete-form-{{ $item->id }}" action="{{ route('admin.keuangan.destroy', $item->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-800" title="Hapus">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                </svg>
+                                            <button type="button" onclick="if(confirm('Yakin ingin menghapus data ini?')) document.getElementById('delete-form-{{ $item->id }}').submit();"
+                                                class="bg-red-50 text-red-600 px-3 py-2 rounded-lg hover:bg-red-100 transition font-semibold text-xs border border-red-200">
+                                                <iconify-icon icon="mdi:trash-can" class="text-base"></iconify-icon>
                                             </button>
                                         </form>
                                     </div>

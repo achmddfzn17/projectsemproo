@@ -61,19 +61,19 @@
         <!-- Actions -->
         <div class="flex justify-center space-x-4">
             <button onclick="printCard()" 
-                    class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all shadow-lg font-semibold">
-                🖨️ Print Kartu
+                    class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all shadow-lg font-semibold flex items-center gap-2">
+                <iconify-icon icon="mdi:printer"></iconify-icon> Print Kartu
             </button>
             <button onclick="downloadQR()" 
-                    class="bg-green-600 text-white px-6 py-3 rounded-xl hover:bg-green-700 transition-all shadow-lg font-semibold">
-                📥 Download QR
+                    class="bg-green-600 text-white px-6 py-3 rounded-xl hover:bg-green-700 transition-all shadow-lg font-semibold flex items-center gap-2">
+                <iconify-icon icon="mdi:download"></iconify-icon> Download QR
             </button>
         </div>
     </div>
 
     <!-- Info -->
     <div class="bg-yellow-50 rounded-xl p-4 border border-yellow-200">
-        <p class="font-semibold text-gray-800 mb-2">📌 Informasi:</p>
+        <p class="font-semibold text-gray-800 mb-2 flex items-center gap-2"><iconify-icon icon="mdi:information" class="text-yellow-500"></iconify-icon> Informasi:</p>
         <ul class="text-sm text-gray-600 space-y-1 list-disc list-inside">
             <li>Kartu ini adalah identitas digital Anda sebagai anggota</li>
             <li>QR Code berisi informasi dasar keanggotaan</li>

@@ -14,7 +14,7 @@
                     <span class="text-sm font-bold text-blue-700">Organisasi Kepemudaan Indonesia</span>
                 </div>
 
-                <h1 class="text-5xl md:text-6xl font-black text-gray-800 mb-6 leading-tight">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-800 mb-6 leading-tight">
                     Karang Taruna
                     <br>
                     <span class="text-blue-500">Generasi Emas</span>
@@ -77,16 +77,16 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
             @php
                 $features = [
-                    ['icon' => '🎓', 'title' => 'Pengembangan Diri', 'desc' => 'Tingkatkan skill melalui pelatihan'],
-                    ['icon' => '🤝', 'title' => 'Networking', 'desc' => 'Bangun relasi dengan pemuda'],
-                    ['icon' => '💼', 'title' => 'Pengalaman', 'desc' => 'Dapatkan pengalaman organisasi'],
-                    ['icon' => '🏆', 'title' => 'Prestasi', 'desc' => 'Raih penghargaan dan sertifikat'],
+                    ['icon' => 'mdi:school', 'title' => 'Pengembangan Diri', 'desc' => 'Tingkatkan skill melalui pelatihan'],
+                    ['icon' => 'mdi:handshake', 'title' => 'Networking', 'desc' => 'Bangun relasi dengan pemuda'],
+                    ['icon' => 'mdi:briefcase', 'title' => 'Pengalaman', 'desc' => 'Dapatkan pengalaman organisasi'],
+                    ['icon' => 'mdi:trophy', 'title' => 'Prestasi', 'desc' => 'Raih penghargaan dan sertifikat'],
                 ];
             @endphp
 
             @foreach($features as $feature)
             <div class="bg-blue-50 rounded-2xl p-6 border border-blue-100 hover:shadow-lg transition-all">
-                <div class="text-4xl mb-4" aria-hidden="true">{{ $feature['icon'] }}</div>
+                <iconify-icon icon="{{ $feature['icon'] }}" class="text-4xl mb-4 text-blue-500" aria-hidden="true"></iconify-icon>
                 <h3 class="text-lg font-bold text-gray-800 mb-2">{{ $feature['title'] }}</h3>
                 <p class="text-gray-600">{{ $feature['desc'] }}</p>
             </div>
@@ -119,7 +119,7 @@
                              class="w-full h-full object-cover">
                     @else
                         <div class="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                            <span class="text-white text-5xl" aria-hidden="true">📰</span>
+                            <iconify-icon icon="mdi:newspaper" class="text-white text-5xl" aria-hidden="true"></iconify-icon>
                         </div>
                     @endif
                 </div>
@@ -137,7 +137,7 @@
             </article>
             @empty
             <div class="col-span-3 text-center py-12">
-                <div class="text-6xl mb-4" aria-hidden="true">📰</div>
+                <iconify-icon icon="mdi:newspaper" class="text-6xl mb-4 text-gray-400" aria-hidden="true"></iconify-icon>
                 <p class="text-gray-500">Belum ada berita tersedia</p>
             </div>
             @endforelse
@@ -169,7 +169,7 @@
                              class="w-full h-full object-cover">
                     @else
                         <div class="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                            <span class="text-white text-4xl" aria-hidden="true">📅</span>
+                            <iconify-icon icon="mdi:calendar" class="text-white text-4xl" aria-hidden="true"></iconify-icon>
                         </div>
                     @endif
                     <div class="absolute top-3 left-3">
@@ -180,8 +180,9 @@
                 </div>
                 <div class="p-5">
                     <h3 class="text-base font-bold text-gray-800 mb-2 line-clamp-2">{{ $kegiatan->nama_kegiatan }}</h3>
-                    <time class="text-sm text-gray-600 mb-3 block">
-                        📅 {{ $kegiatan->tanggal_mulai ? $kegiatan->tanggal_mulai->format('d M Y') : '-' }}
+                    <time class="text-sm text-gray-600 mb-3 block flex items-center gap-1">
+                        <iconify-icon icon="mdi:calendar" class="text-blue-500"></iconify-icon>
+                        {{ $kegiatan->tanggal_mulai ? $kegiatan->tanggal_mulai->format('d M Y') : '-' }}
                     </time>
                     <a href="{{ route('kegiatan.detail', $kegiatan->id) }}" 
                        class="text-blue-500 font-bold hover:text-blue-600 text-sm inline-flex items-center">
@@ -191,7 +192,7 @@
             </article>
             @empty
             <div class="col-span-4 text-center py-12">
-                <div class="text-6xl mb-4" aria-hidden="true">📅</div>
+                <iconify-icon icon="mdi:calendar-blank" class="text-6xl mb-4 text-gray-400" aria-hidden="true"></iconify-icon>
                 <p class="text-gray-500">Belum ada kegiatan tersedia</p>
             </div>
             @endforelse

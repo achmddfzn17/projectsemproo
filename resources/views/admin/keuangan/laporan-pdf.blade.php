@@ -183,7 +183,7 @@
         </div>
     </div>
 
-    <h3>📥 Rincian Kas Masuk</h3>
+    <h3>Rincian Kas Masuk</h3>
     <table>
         <thead>
             <tr>
@@ -215,7 +215,7 @@
         </tbody>
     </table>
 
-    <h3>📤 Rincian Kas Keluar</h3>
+    <h3>Rincian Kas Keluar</h3>
     <table>
         <thead>
             <tr>
@@ -247,7 +247,7 @@
         </tbody>
     </table>
 
-    <h3>📊 Rekapitulasi</h3>
+    <h3>Rekapitulasi</h3>
     <table>
         <thead>
             <tr>

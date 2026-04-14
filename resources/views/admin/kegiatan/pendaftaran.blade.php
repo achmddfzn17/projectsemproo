@@ -11,12 +11,12 @@
         </div>
         <div class="flex space-x-3">
             <a href="{{ route('admin.kegiatan.scan') }}" 
-               class="bg-purple-600 text-white px-6 py-3 rounded-xl hover:bg-purple-700 transition-all shadow-lg font-semibold">
-                📷 Scan QR Check-in
+               class="bg-purple-600 text-white px-6 py-3 rounded-xl hover:bg-purple-700 transition-all shadow-lg font-semibold flex items-center gap-2">
+                <iconify-icon icon="mdi:qrcode-scan"></iconify-icon> Scan QR Check-in
             </a>
             <a href="{{ route('admin.kegiatan.export-absensi', $kegiatan->id) }}" 
-               class="bg-green-600 text-white px-6 py-3 rounded-xl hover:bg-green-700 transition-all shadow-lg font-semibold">
-                📥 Export Absensi
+               class="bg-green-600 text-white px-6 py-3 rounded-xl hover:bg-green-700 transition-all shadow-lg font-semibold flex items-center gap-2">
+                <iconify-icon icon="mdi:file-download"></iconify-icon> Export Absensi
             </a>
         </div>
     </div>
@@ -31,7 +31,7 @@
                 <p class="text-3xl font-black text-blue-600">{{ $pendaftaran->total() }}</p>
             </div>
             <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                <span class="text-2xl">📝</span>
+                <iconify-icon icon="mdi:clipboard-list" class="text-2xl text-blue-500"></iconify-icon>
             </div>
         </div>
     </div>
@@ -43,7 +43,7 @@
                 <p class="text-3xl font-black text-yellow-600">{{ $pendaftaran->where('status', 'pending')->count() }}</p>
             </div>
             <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
-                <span class="text-2xl">⏳</span>
+                <iconify-icon icon="mdi:clock-outline" class="text-2xl text-yellow-500"></iconify-icon>
             </div>
         </div>
     </div>
@@ -55,7 +55,7 @@
                 <p class="text-3xl font-black text-green-600">{{ $pendaftaran->where('status', 'approved')->count() }}</p>
             </div>
             <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                <span class="text-2xl">✅</span>
+                <iconify-icon icon="mdi:check-circle" class="text-2xl text-green-500"></iconify-icon>
             </div>
         </div>
     </div>
@@ -67,7 +67,7 @@
                 <p class="text-3xl font-black text-purple-600">{{ $pendaftaran->where('hadir', true)->count() }}</p>
             </div>
             <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                <span class="text-2xl">👥</span>
+                <iconify-icon icon="mdi:account-group" class="text-2xl text-purple-500"></iconify-icon>
             </div>
         </div>
     </div>
@@ -163,7 +163,7 @@
                 @empty
                 <tr>
                     <td colspan="7" class="text-center py-12">
-                        <div class="text-6xl mb-4">📋</div>
+                        <iconify-icon icon="mdi:clipboard-off" class="text-6xl mb-4 text-gray-400"></iconify-icon>
                         <p class="text-gray-500 font-semibold">Belum ada pendaftaran</p>
                     </td>
                 </tr>

@@ -13,6 +13,7 @@ class Galeri extends Model
 
     protected $fillable = [
         'kegiatan_id',
+        'nama_kegiatan',
         'judul',
         'deskripsi',
         'foto',
@@ -27,7 +28,7 @@ class Galeri extends Model
     public function getFotoUrlAttribute()
     {
         if ($this->foto) {
-            return asset('storage/'.$this->foto);
+            return asset($this->foto);
         }
 
         return null;

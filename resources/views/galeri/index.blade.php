@@ -29,8 +29,8 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($galeris as $item)
             <div class="group relative overflow-hidden rounded-2xl shadow-lg bg-gray-100 aspect-square">
-                @if($item->foto)
-                <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->judul }}"
+                @if($item->foto && file_exists(public_path($item->foto)))
+                <img src="{{ asset($item->foto) }}" alt="{{ $item->judul }}"
                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                 @else
                 <div class="w-full h-full bg-gray-200 flex items-center justify-center">

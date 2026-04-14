@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Galeri;
 use App\Models\Kegiatan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class GaleriController extends Controller
 {
@@ -45,7 +47,8 @@ class GaleriController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'kegiatan_id' => 'nullable|exists:kegiatans,id',
+            'kegiatan_id' => 'nullable|exists:kegiatan,id',
+            'nama_kegiatan' => 'nullable|string|max:255',
             'judul' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'foto' => 'required|image|max:5120',
@@ -53,7 +56,10 @@ class GaleriController extends Controller
         ]);
 
         if ($request->hasFile('foto')) {
-            $validated['foto'] = $request->file('foto')->store('galeri', 'public');
+            $file = $request->file('foto');
+            $filename = Str::uuid().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('images/galeri'), $filename);
+            $validated['foto'] = 'images/galeri/'.$filename;
         }
 
         Galeri::create($validated);
@@ -80,7 +86,8 @@ class GaleriController extends Controller
         $galeri = Galeri::findOrFail($id);
 
         $validated = $request->validate([
-            'kegiatan_id' => 'nullable|exists:kegiatans,id',
+            'kegiatan_id' => 'nullable|exists:kegiatan,id',
+            'nama_kegiatan' => 'nullable|string|max:255',
             'judul' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'foto' => 'nullable|image|max:5120',
@@ -89,10 +96,13 @@ class GaleriController extends Controller
 
         if ($request->hasFile('foto')) {
             // Delete old foto
-            if ($galeri->foto) {
-                \Storage::disk('public')->delete($galeri->foto);
+            if ($galeri->foto && File::exists(public_path($galeri->foto))) {
+                File::delete(public_path($galeri->foto));
             }
-            $validated['foto'] = $request->file('foto')->store('galeri', 'public');
+            $file = $request->file('foto');
+            $filename = Str::uuid().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('images/galeri'), $filename);
+            $validated['foto'] = 'images/galeri/'.$filename;
         }
 
         $galeri->update($validated);
@@ -107,8 +117,8 @@ class GaleriController extends Controller
     {
         $galeri = Galeri::findOrFail($id);
 
-        if ($galeri->foto) {
-            \Storage::disk('public')->delete($galeri->foto);
+        if ($galeri->foto && File::exists(public_path($galeri->foto))) {
+            File::delete(public_path($galeri->foto));
         }
 
         $galeri->delete();

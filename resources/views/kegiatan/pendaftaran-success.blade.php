@@ -7,7 +7,7 @@
     <div class="max-w-2xl mx-auto">
         <!-- Success Message -->
         <div class="bg-green-50 border-2 border-green-500 rounded-2xl p-8 text-center mb-8">
-            <div class="text-6xl mb-4">✅</div>
+            <iconify-icon icon="mdi:check-circle" class="text-6xl mb-4 text-green-500"></iconify-icon>
             <h1 class="text-3xl font-black text-green-700 mb-2">Pendaftaran Berhasil!</h1>
             <p class="text-green-600">Terima kasih telah mendaftar</p>
         </div>
@@ -58,19 +58,19 @@
 
             <div class="flex justify-center space-x-4">
                 <button onclick="downloadQR()" 
-                        class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all shadow-lg font-semibold">
-                    📥 Download QR Code
+                        class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all shadow-lg font-semibold flex items-center gap-2">
+                    <iconify-icon icon="mdi:download"></iconify-icon> Download QR Code
                 </button>
                 <button onclick="window.print()" 
-                        class="bg-green-600 text-white px-6 py-3 rounded-xl hover:bg-green-700 transition-all shadow-lg font-semibold">
-                    🖨️ Print
+                        class="bg-green-600 text-white px-6 py-3 rounded-xl hover:bg-green-700 transition-all shadow-lg font-semibold flex items-center gap-2">
+                    <iconify-icon icon="mdi:printer"></iconify-icon> Print
                 </button>
             </div>
         </div>
 
         <!-- Status Info -->
         <div class="bg-blue-50 rounded-xl p-6 border border-blue-200 mb-6">
-            <h4 class="font-bold text-blue-800 mb-3">📋 Status Pendaftaran: PENDING</h4>
+            <h4 class="font-bold text-blue-800 mb-3 flex items-center gap-2"><iconify-icon icon="mdi:clipboard-list" class="text-blue-500"></iconify-icon> Status Pendaftaran: PENDING</h4>
             <p class="text-blue-700 mb-3">Pendaftaran Anda sedang dalam proses verifikasi oleh admin.</p>
             <ul class="text-sm text-blue-600 space-y-2 list-disc list-inside">
                 <li>Anda akan menerima email konfirmasi setelah pendaftaran disetujui</li>
@@ -87,9 +87,9 @@
                 ← Kembali ke Detail Kegiatan
             </a>
             <a href="{{ route('home') }}" 
-               class="flex-1 text-center bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all font-semibold">
-                🏠 Ke Beranda
-            </a>
+               class="flex-1 text-center bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all font-semibold flex items-center justify-center gap-2">
+                 <iconify-icon icon="mdi:home"></iconify-icon> Ke Beranda
+             </a>
         </div>
     </div>
 </div>

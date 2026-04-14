@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Karang Taruna')</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     <link rel="stylesheet" href="{{ asset('css/custom-animations.css') }}">
     <style>
         /* Smooth Scrolling */
@@ -156,10 +157,10 @@
                     <h3 class="text-lg font-bold text-gray-900">Anda Sedang Offline</h3>
                     <p class="mt-1 text-sm text-gray-600">Sepertinya koneksi internet Anda terputus. Beberapa fitur
                         mungkin tidak tersedia saat ini.</p>
-                    <button onclick="location.reload()"
-                        class="mt-3 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all transform hover:scale-105">
-                        🔄 Coba Lagi
-                    </button>
+                        <button onclick="location.reload()"
+                            class="mt-3 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all transform hover:scale-105 flex items-center gap-2">
+                            <iconify-icon icon="mdi:refresh" class="text-lg"></iconify-icon> Coba Lagi
+                        </button>
                 </div>
                 <button onclick="closeOfflineNotification()" class="ml-4 text-gray-400 hover:text-gray-600">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -221,44 +222,44 @@
                     </div>
 
                     <a href="{{ route('home') }}"
-                        class="px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all {{ request()->routeIs('home') ? 'bg-blue-50 text-blue-600' : '' }}">
-                        🏠 Beranda
+                        class="px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all flex items-center gap-1 {{ request()->routeIs('home') ? 'bg-blue-50 text-blue-600' : '' }}">
+                        <iconify-icon icon="mdi:home" class="text-lg"></iconify-icon> Beranda
                     </a>
                     <a href="{{ route('tentang') }}"
-                        class="px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all {{ request()->routeIs('tentang') ? 'bg-blue-50 text-blue-600' : '' }}">
-                        ℹ️ Tentang
+                        class="px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all flex items-center gap-1 {{ request()->routeIs('tentang') ? 'bg-blue-50 text-blue-600' : '' }}">
+                        <iconify-icon icon="mdi:information" class="text-lg"></iconify-icon> Tentang
                     </a>
                     <a href="{{ route('kegiatan.index') }}"
-                        class="px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all {{ request()->routeIs('kegiatan.*') ? 'bg-blue-50 text-blue-600' : '' }}">
-                        📅 Kegiatan
+                        class="px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all flex items-center gap-1 {{ request()->routeIs('kegiatan.*') ? 'bg-blue-50 text-blue-600' : '' }}">
+                        <iconify-icon icon="mdi:calendar" class="text-lg"></iconify-icon> Kegiatan
                     </a>
                     <a href="{{ route('berita.index') }}"
-                        class="px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all {{ request()->routeIs('berita.*') ? 'bg-blue-50 text-blue-600' : '' }}">
-                        📰 Berita
+                        class="px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all flex items-center gap-1 {{ request()->routeIs('berita.*') ? 'bg-blue-50 text-blue-600' : '' }}">
+                        <iconify-icon icon="mdi:newspaper" class="text-lg"></iconify-icon> Berita
                     </a>
                     <a href="{{ route('artikel.index') }}"
-                        class="px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all {{ request()->routeIs('artikel.*') ? 'bg-blue-50 text-blue-600' : '' }}">
-                        📝 Artikel
+                        class="px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all flex items-center gap-1 {{ request()->routeIs('artikel.*') ? 'bg-blue-50 text-blue-600' : '' }}">
+                        <iconify-icon icon="mdi:file-document" class="text-lg"></iconify-icon> Artikel
                     </a>
                     <a href="{{ route('galeri.index') }}"
-                        class="px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all {{ request()->routeIs('galeri.*') ? 'bg-blue-50 text-blue-600' : '' }}">
-                        📷 Galeri
+                        class="px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all flex items-center gap-1 {{ request()->routeIs('galeri.*') ? 'bg-blue-50 text-blue-600' : '' }}">
+                        <iconify-icon icon="mdi:image" class="text-lg"></iconify-icon> Galeri
                     </a>
 
                     @if(auth()->guard('web')->check())
                         <a href="{{ route('admin.dashboard') }}"
-                            class="ml-2 bg-blue-600 text-white px-6 py-2 rounded-xl font-bold hover:bg-blue-700 hover:shadow-lg transform hover:scale-105 transition-all">
-                            ⚡ Admin
+                            class="ml-2 bg-blue-600 text-white px-6 py-2 rounded-xl font-bold hover:bg-blue-700 hover:shadow-lg transform hover:scale-105 transition-all flex items-center gap-1">
+                            <iconify-icon icon="mdi:shield-crown" class="text-lg"></iconify-icon> Admin
                         </a>
                     @elseif(auth()->guard('anggota')->check())
                         <a href="{{ route('anggota.dashboard') }}"
-                            class="ml-2 bg-green-600 text-white px-6 py-2 rounded-xl font-bold hover:bg-green-700 hover:shadow-lg transform hover:scale-105 transition-all">
-                            👤 Dashboard
+                            class="ml-2 bg-green-600 text-white px-6 py-2 rounded-xl font-bold hover:bg-green-700 hover:shadow-lg transform hover:scale-105 transition-all flex items-center gap-1">
+                            <iconify-icon icon="mdi:account" class="text-lg"></iconify-icon> Dashboard
                         </a>
                     @else
                         <a href="{{ route('anggota.login') }}"
-                            class="ml-2 bg-blue-600 text-white px-6 py-2 rounded-xl font-bold hover:bg-blue-700 hover:shadow-lg transform hover:scale-105 transition-all">
-                            🔐 Login Anggota
+                            class="ml-2 bg-blue-600 text-white px-6 py-2 rounded-xl font-bold hover:bg-blue-700 hover:shadow-lg transform hover:scale-105 transition-all flex items-center gap-1">
+                            <iconify-icon icon="mdi:lock" class="text-lg"></iconify-icon> Login Anggota
                         </a>
                     @endif
                 </div>
@@ -279,35 +280,35 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
             <div class="px-4 py-4 space-y-2">
                 <a href="{{ route('home') }}"
-                    class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-semibold transition">🏠
-                    Beranda</a>
+                    class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-semibold transition flex items-center gap-2">
+                    <iconify-icon icon="mdi:home"></iconify-icon> Beranda</a>
                 <a href="{{ route('tentang') }}"
-                    class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-semibold transition">ℹ️
-                    Tentang</a>
+                    class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-semibold transition flex items-center gap-2">
+                    <iconify-icon icon="mdi:information"></iconify-icon> Tentang</a>
                 <a href="{{ route('kegiatan.index') }}"
-                    class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-semibold transition">📅
-                    Kegiatan</a>
+                    class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-semibold transition flex items-center gap-2">
+                    <iconify-icon icon="mdi:calendar"></iconify-icon> Kegiatan</a>
                 <a href="{{ route('berita.index') }}"
-                    class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-semibold transition">📰
-                    Berita</a>
+                    class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-semibold transition flex items-center gap-2">
+                    <iconify-icon icon="mdi:newspaper"></iconify-icon> Berita</a>
                 <a href="{{ route('artikel.index') }}"
-                    class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-semibold transition">📝
-                    Artikel</a>
+                    class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-semibold transition flex items-center gap-2">
+                    <iconify-icon icon="mdi:file-document"></iconify-icon> Artikel</a>
                 <a href="{{ route('galeri.index') }}"
-                    class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-semibold transition">📷
-                    Galeri</a>
+                    class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-semibold transition flex items-center gap-2">
+                    <iconify-icon icon="mdi:image"></iconify-icon> Galeri</a>
                 @if(auth()->guard('web')->check())
                     <a href="{{ route('admin.dashboard') }}"
-                        class="block px-4 py-3 bg-blue-600 text-white rounded-lg font-bold text-center hover:bg-blue-700 transition">⚡
-                        Dashboard</a>
+                        class="block px-4 py-3 bg-blue-600 text-white rounded-lg font-bold text-center hover:bg-blue-700 transition flex items-center justify-center gap-2">
+                        <iconify-icon icon="mdi:shield-crown"></iconify-icon> Dashboard</a>
                 @elseif(auth()->guard('anggota')->check())
                     <a href="{{ route('anggota.dashboard') }}"
-                        class="block px-4 py-3 bg-blue-600 text-white rounded-lg font-bold text-center hover:bg-blue-700 transition">👤
-                        Dashboard Anggota</a>
+                        class="block px-4 py-3 bg-blue-600 text-white rounded-lg font-bold text-center hover:bg-blue-700 transition flex items-center justify-center gap-2">
+                        <iconify-icon icon="mdi:account"></iconify-icon> Dashboard Anggota</a>
                 @else
                     <a href="{{ route('anggota.login') }}"
-                        class="block px-4 py-3 bg-blue-600 text-white rounded-lg font-bold text-center hover:bg-blue-700 transition">🔐
-                        Login Anggota</a>
+                        class="block px-4 py-3 bg-blue-600 text-white rounded-lg font-bold text-center hover:bg-blue-700 transition flex items-center justify-center gap-2">
+                        <iconify-icon icon="mdi:lock"></iconify-icon> Login Anggota</a>
                 @endif
             </div>
         </div>
@@ -535,7 +536,7 @@
             <!-- Bottom Bar -->
             <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
                 <p class="text-gray-400 text-sm mb-4 md:mb-0">
-                    &copy; {{ date('Y') }} Karang Taruna. Made with ❤️ for Indonesian Youth
+                    &copy; {{ date('Y') }} Karang Taruna. Made with <iconify-icon icon="mdi:heart" class="text-red-500"></iconify-icon> for Indonesian Youth
                 </p>
                 <div class="flex space-x-6 text-sm">
                     <a href="#" class="text-gray-400 hover:text-blue-400 transition">Privacy Policy</a>

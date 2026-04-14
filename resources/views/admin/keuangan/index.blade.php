@@ -7,7 +7,7 @@
 <div class="mb-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white shadow-xl">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-            <h1 class="text-4xl font-extrabold mb-2">💰 Manajemen Keuangan</h1>
+            <h1 class="text-4xl font-extrabold mb-2 flex items-center gap-2"><iconify-icon icon="mdi:wallet" class="text-2xl"></iconify-icon> Manajemen Keuangan</h1>
             <p class="text-blue-100 text-lg">Karang Taruna "Generasi Emas"</p>
             <p class="text-blue-200 text-sm mt-1">{{ now()->isoFormat('dddd, D MMMM Y') }}</p>
         </div>
@@ -18,9 +18,9 @@
             <a href="{{ route('admin.keuangan.keluar') }}" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-xl px-4 py-2 text-sm font-semibold transition-all">
                 + Kas Keluar
             </a>
-            <a href="{{ route('admin.keuangan.laporan') }}" class="bg-white text-blue-700 hover:bg-blue-50 rounded-xl px-4 py-2 text-sm font-semibold transition-all">
-                📊 Laporan
-            </a>
+                <a href="{{ route('admin.keuangan.laporan') }}" class="bg-white text-blue-700 hover:bg-blue-50 rounded-xl px-4 py-2 text-sm font-semibold transition-all flex items-center gap-1">
+                    <iconify-icon icon="mdi:chart-bar"></iconify-icon> Laporan
+                </a>
         </div>
     </div>
 </div>
@@ -88,7 +88,7 @@
     <!-- Grafik -->
     <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-blue-100">
         <div class="p-6 border-b border-blue-100">
-            <h2 class="text-xl font-bold text-gray-800">📈 Grafik Arus Kas (12 Bulan Terakhir)</h2>
+            <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2"><iconify-icon icon="mdi:chart-line" class="text-blue-500"></iconify-icon> Grafik Arus Kas (12 Bulan Terakhir)</h2>
         </div>
         <div class="p-6">
             <canvas id="keuanganChart" height="200"></canvas>
@@ -99,7 +99,7 @@
     <div class="bg-white rounded-2xl shadow-lg border border-blue-100">
         <div class="p-6 border-b border-blue-100">
             <div class="flex items-center justify-between">
-                <h2 class="text-xl font-bold text-gray-800">🕐 Transaksi Terbaru</h2>
+                <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2"><iconify-icon icon="mdi:clock-outline" class="text-blue-500"></iconify-icon> Transaksi Terbaru</h2>
                 <a href="{{ route('admin.keuangan.masuk') }}" class="text-sm text-blue-600 hover:text-blue-700 font-semibold">Lihat Semua →</a>
             </div>
         </div>

@@ -7,15 +7,15 @@
 <div class="mb-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white shadow-xl">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-            <h1 class="text-4xl font-extrabold mb-2">📊 Laporan Keuangan</h1>
+            <h1 class="text-4xl font-extrabold mb-2 flex items-center gap-2"><iconify-icon icon="mdi:chart-bar" class="text-2xl"></iconify-icon> Laporan Keuangan</h1>
             <p class="text-blue-100 text-lg">Karang Taruna "Generasi Emas"</p>
         </div>
         <div class="flex gap-2">
             <a href="{{ route('admin.keuangan.index') }}" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-xl px-4 py-2 text-sm font-semibold transition-all">
                 ← Dashboard
             </a>
-            <a href="{{ route('admin.keuangan.kategori') }}" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-xl px-4 py-2 text-sm font-semibold transition-all">
-                ⚙️ Kelola Kategori
+            <a href="{{ route('admin.keuangan.kategori') }}" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-xl px-4 py-2 text-sm font-semibold transition-all flex items-center gap-1">
+                <iconify-icon icon="mdi:cog"></iconify-icon> Kelola Kategori
             </a>
         </div>
     </div>
@@ -23,7 +23,7 @@
 
 <!-- Filter Form -->
 <div class="bg-white rounded-2xl shadow-lg border border-blue-100 p-6 mb-6">
-    <h2 class="text-lg font-bold text-gray-800 mb-4">🔍 Filter Laporan</h2>
+    <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2"><iconify-icon icon="mdi:magnify" class="text-blue-500"></iconify-icon> Filter Laporan</h2>
     <form action="{{ route('admin.keuangan.laporan') }}" method="GET" class="flex flex-wrap gap-4 items-end">
         <div>
             <label class="block text-sm font-semibold text-gray-700 mb-2">Tanggal Awal</label>
@@ -43,7 +43,7 @@
         <div class="flex gap-2 ml-auto">
             <a href="{{ route('admin.keuangan.export-pdf', ['tanggal_awal' => $tanggalAwal, 'tanggal_akhir' => $tanggalAkhir]) }}" 
                 class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl transition-all inline-flex items-center gap-2">
-                📥 Download PDF
+                <iconify-icon icon="mdi:file-download"></iconify-icon> Download PDF
             </a>
         </div>
     </form>
@@ -114,7 +114,7 @@
     <!-- Rekap Kas Masuk -->
     <div class="bg-white rounded-2xl shadow-lg border border-blue-100">
         <div class="p-6 border-b border-blue-100">
-            <h2 class="text-xl font-bold text-gray-800">💚 Rekap Kas Masuk per Kategori</h2>
+            <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2"><iconify-icon icon="mdi:chart-line" class="text-green-500"></iconify-icon> Rekap Kas Masuk per Kategori</h2>
         </div>
         <div class="p-6">
             <table class="w-full">
@@ -156,7 +156,7 @@
     <!-- Rekap Kas Keluar -->
     <div class="bg-white rounded-2xl shadow-lg border border-red-100">
         <div class="p-6 border-b border-red-100">
-            <h2 class="text-xl font-bold text-gray-800">❤️ Rekap Kas Keluar per Kategori</h2>
+            <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2"><iconify-icon icon="mdi:chart-line-variant" class="text-red-500"></iconify-icon> Rekap Kas Keluar per Kategori</h2>
         </div>
         <div class="p-6">
             <table class="w-full">
@@ -201,7 +201,7 @@
     <!-- Detail Kas Masuk -->
     <div class="bg-white rounded-2xl shadow-lg border border-blue-100">
         <div class="p-6 border-b border-blue-100">
-            <h2 class="text-xl font-bold text-gray-800">📝 Detail Kas Masuk</h2>
+            <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2"><iconify-icon icon="mdi:file-document" class="text-blue-500"></iconify-icon> Detail Kas Masuk</h2>
         </div>
         <div class="p-6 max-h-96 overflow-y-auto">
             @forelse($kasMasuk as $item)
@@ -223,7 +223,7 @@
     <!-- Detail Kas Keluar -->
     <div class="bg-white rounded-2xl shadow-lg border border-red-100">
         <div class="p-6 border-b border-red-100">
-            <h2 class="text-xl font-bold text-gray-800">📝 Detail Kas Keluar</h2>
+            <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2"><iconify-icon icon="mdi:file-document" class="text-red-500"></iconify-icon> Detail Kas Keluar</h2>
         </div>
         <div class="p-6 max-h-96 overflow-y-auto">
             @forelse($kasKeluar as $item)

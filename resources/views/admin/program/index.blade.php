@@ -44,10 +44,10 @@
                     <td class="py-4 px-6">
                         <div class="flex space-x-3">
                             <a href="{{ route('admin.program.edit', $item->id) }}" class="text-blue-600 hover:text-blue-700 font-semibold">Edit</a>
-                            <form method="POST" action="{{ route('admin.program.destroy', $item->id) }}" onsubmit="return confirm('Yakin ingin menghapus program ini?')">
+                            <form id="delete-form-{{ $item->id }}" method="POST" action="{{ route('admin.program.destroy', $item->id) }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-700 font-semibold">Hapus</button>
+                                <button type="button" onclick="if(confirm('Yakin ingin menghapus program ini?')) document.getElementById('delete-form-{{ $item->id }}').submit();" class="text-red-600 hover:text-red-700 font-semibold">Hapus</button>
                             </form>
                         </div>
                     </td>

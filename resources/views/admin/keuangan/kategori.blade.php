@@ -7,7 +7,7 @@
 <div class="mb-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white shadow-xl">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-            <h1 class="text-4xl font-extrabold mb-2">⚙️ Kelola Kategori Transaksi</h1>
+            <h1 class="text-4xl font-extrabold mb-2 flex items-center gap-2"><iconify-icon icon="mdi:cog" class="text-2xl"></iconify-icon> Kelola Kategori Transaksi</h1>
             <p class="text-blue-100 text-lg">Tambah, edit, dan hapus kategori keuangan</p>
         </div>
         <a href="{{ route('admin.keuangan.index') }}" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-xl px-4 py-2 text-sm font-semibold transition-all">
@@ -33,7 +33,7 @@
     <div class="bg-white rounded-2xl shadow-lg border border-blue-200">
         <div class="p-6 border-b border-blue-200 bg-gradient-to-r from-blue-50 to-white">
             <div class="flex items-center justify-between">
-                <h2 class="text-xl font-bold text-blue-700">💰 Kategori Kas Masuk</h2>
+                <h2 class="text-xl font-bold text-blue-700 flex items-center gap-2"><iconify-icon icon="mdi:cash-plus" class="text-xl"></iconify-icon> Kategori Kas Masuk</h2>
                 <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">
                     {{ $kategoris->where('jenis', 'masuk')->count() }} kategori
                 </span>
@@ -69,14 +69,11 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="text-xs text-gray-500">{{ $kategori->transaksis->count() }} transaksi</span>
-                        <form action="{{ route('admin.keuangan.kategori.destroy', $kategori->id) }}" method="POST" 
-                            onsubmit="return confirm('Yakin hapus kategori ini?')">
+                        <form id="delete-form-{{ $kategori->id }}" action="{{ route('admin.keuangan.kategori.destroy', $kategori->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-red-600 hover:text-red-800 p-2 rounded-lg hover:bg-red-100 transition-all">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                </svg>
+                            <button type="button" onclick="if(confirm('Yakin hapus kategori ini?')) document.getElementById('delete-form-{{ $kategori->id }}').submit();" class="text-red-600 hover:text-red-800 p-2 rounded-lg hover:bg-red-100 transition-all">
+                                <iconify-icon icon="mdi:trash-can" class="text-xl"></iconify-icon>
                             </button>
                         </form>
                     </div>
@@ -97,7 +94,7 @@
     <div class="bg-white rounded-2xl shadow-lg border border-red-100">
         <div class="p-6 border-b border-red-100 bg-gradient-to-r from-red-50 to-white">
             <div class="flex items-center justify-between">
-                <h2 class="text-xl font-bold text-red-700">❤️ Kategori Kas Keluar</h2>
+                <h2 class="text-xl font-bold text-red-700 flex items-center gap-2"><iconify-icon icon="mdi:cash-minus" class="text-xl"></iconify-icon> Kategori Kas Keluar</h2>
                 <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">
                     {{ $kategoris->where('jenis', 'keluar')->count() }} kategori
                 </span>
@@ -133,14 +130,11 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="text-xs text-gray-500">{{ $kategori->transaksis->count() }} transaksi</span>
-                        <form action="{{ route('admin.keuangan.kategori.destroy', $kategori->id) }}" method="POST" 
-                            onsubmit="return confirm('Yakin hapus kategori ini?')">
+                        <form id="delete-form-{{ $kategori->id }}" action="{{ route('admin.keuangan.kategori.destroy', $kategori->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-red-600 hover:text-red-800 p-2 rounded-lg hover:bg-red-100 transition-all">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                </svg>
+                            <button type="button" onclick="if(confirm('Yakin hapus kategori ini?')) document.getElementById('delete-form-{{ $kategori->id }}').submit();" class="text-red-600 hover:text-red-800 p-2 rounded-lg hover:bg-red-100 transition-all">
+                                <iconify-icon icon="mdi:trash-can" class="text-xl"></iconify-icon>
                             </button>
                         </form>
                     </div>
@@ -160,7 +154,7 @@
 
 <!-- Tips -->
 <div class="mt-6 bg-blue-50 border border-blue-200 rounded-2xl p-6">
-    <h3 class="font-bold text-blue-800 mb-2">💡 Tips Kategori</h3>
+    <h3 class="font-bold text-blue-800 mb-2 flex items-center gap-2"><iconify-icon icon="mdi:lightbulb" class="text-yellow-500"></iconify-icon> Tips Kategori</h3>
     <ul class="text-sm text-blue-700 space-y-1">
         <li>• Gunakan nama kategori yang spesifik agar laporan lebih detail</li>
         <li>• Kategori yang sudah digunakan dalam transaksi <strong>tidak dapat dihapus</strong></li>

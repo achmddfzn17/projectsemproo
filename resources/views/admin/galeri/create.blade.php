@@ -12,7 +12,7 @@
             </svg>
         </a>
         <div>
-            <h1 class="text-4xl font-extrabold mb-2">📷 Upload Foto</h1>
+            <h1 class="text-4xl font-extrabold mb-2 flex items-center gap-2"><iconify-icon icon="mdi:image-plus" class="text-2xl"></iconify-icon> Upload Foto</h1>
             <p class="text-blue-100 text-lg">Tambah foto baru ke galeri</p>
         </div>
     </div>
@@ -36,18 +36,14 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Kegiatan (Opsional)</label>
-                    <select name="kegiatan_id" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 @error('kegiatan_id') border-red-500 @enderror">
-                        <option value="">-- Tidak terkait kegiatan --</option>
-                        @foreach($kegiatans as $kegiatan)
-                        <option value="{{ $kegiatan->id }}" {{ old('kegiatan_id') == $kegiatan->id ? 'selected' : '' }}>
-                            {{ $kegiatan->nama_kegiatan }} ({{ $kegiatan->tanggal_mulai->format('d M Y') }})
-                        </option>
-                        @endforeach
-                    </select>
-                    @error('kegiatan_id')
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Kegiatan (Opsional)</label>
+                    <input type="text" name="nama_kegiatan" value="{{ old('nama_kegiatan') }}"
+                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('nama_kegiatan') border-red-500 @enderror"
+                        placeholder="Contoh: Kerja Bakti Membersihkan Selokan">
+                    @error('nama_kegiatan')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
+                    <p class="text-gray-500 text-xs mt-1">Isi manual nama kegiatan terkait foto ini</p>
                 </div>
 
                 <div>
@@ -80,8 +76,8 @@
                 </div>
             </div>
 
-            <button type="submit" class="w-full mt-6 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 px-6 rounded-xl transition-all transform hover:-translate-y-1 shadow-lg">
-                💾 Upload Foto
+            <button type="submit" class="w-full mt-6 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 px-6 rounded-xl transition-all transform hover:-translate-y-1 shadow-lg flex items-center justify-center gap-2">
+                <iconify-icon icon="mdi:content-save" class="text-lg"></iconify-icon> Upload Foto
             </button>
         </form>
     </div>
@@ -108,7 +104,7 @@ function previewImage(input) {
         reader.onload = function(e) {
             document.getElementById('preview-img').src = e.target.result;
             document.getElementById('preview-img').classList.remove('hidden');
-            document.getElementById('placeholder').classList.add('hidden');
+            document.getElementById('placeholder')?.classList.add('hidden');
         }
         reader.readAsDataURL(input.files[0]);
     }

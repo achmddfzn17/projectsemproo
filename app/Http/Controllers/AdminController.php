@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anggota;
+use App\Models\Artikel;
+use App\Models\Berita;
 use App\Models\Kegiatan;
 use App\Models\Program;
-use App\Models\Berita;
-use App\Models\Artikel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -39,6 +39,7 @@ class AdminController extends Controller
     public function anggotaIndex()
     {
         $anggota = Anggota::latest()->paginate(15);
+
         return view('admin.anggota.index', compact('anggota'));
     }
 
@@ -75,6 +76,7 @@ class AdminController extends Controller
     public function anggotaEdit($id)
     {
         $anggota = Anggota::findOrFail($id);
+
         return view('admin.anggota.edit', compact('anggota'));
     }
 
@@ -84,14 +86,14 @@ class AdminController extends Controller
 
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'nik' => 'required|string|unique:anggota,nik,' . $id,
+            'nik' => 'required|string|unique:anggota,nik,'.$id,
             'tempat_lahir' => 'required|string',
             'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|in:L,P',
             'alamat' => 'required|string',
             'no_hp' => 'required|string',
-            'username' => 'required|string|unique:anggota,username,' . $id,
-            'email' => 'required|email|unique:anggota,email,' . $id,
+            'username' => 'required|string|unique:anggota,username,'.$id,
+            'email' => 'required|email|unique:anggota,email,'.$id,
             'password' => 'nullable|string|min:6',
             'pendidikan_terakhir' => 'required|string',
             'pekerjaan' => 'required|string',
@@ -121,6 +123,7 @@ class AdminController extends Controller
     public function kegiatanIndex()
     {
         $kegiatan = Kegiatan::latest()->paginate(15);
+
         return view('admin.kegiatan.index', compact('kegiatan'));
     }
 
@@ -161,6 +164,7 @@ class AdminController extends Controller
     public function kegiatanEdit($id)
     {
         $kegiatan = Kegiatan::findOrFail($id);
+
         return view('admin.kegiatan.edit', compact('kegiatan'));
     }
 
@@ -210,6 +214,7 @@ class AdminController extends Controller
     public function programIndex()
     {
         $program = Program::latest()->paginate(15);
+
         return view('admin.program.index', compact('program'));
     }
 
@@ -239,6 +244,7 @@ class AdminController extends Controller
     public function programEdit($id)
     {
         $program = Program::findOrFail($id);
+
         return view('admin.program.edit', compact('program'));
     }
 
@@ -274,6 +280,7 @@ class AdminController extends Controller
     public function beritaIndex()
     {
         $berita = Berita::latest()->paginate(15);
+
         return view('admin.berita.index', compact('berita'));
     }
 
@@ -307,6 +314,7 @@ class AdminController extends Controller
     public function beritaEdit($id)
     {
         $berita = Berita::findOrFail($id);
+
         return view('admin.berita.edit', compact('berita'));
     }
 
@@ -316,7 +324,7 @@ class AdminController extends Controller
 
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
-            'slug' => 'required|string|unique:berita,slug,' . $id,
+            'slug' => 'required|string|unique:berita,slug,'.$id,
             'konten' => 'required|string',
             'gambar' => 'nullable|image|max:2048',
             'is_published' => 'nullable|boolean',
@@ -352,6 +360,7 @@ class AdminController extends Controller
     public function artikelIndex()
     {
         $artikel = Artikel::latest()->paginate(15);
+
         return view('admin.artikel.index', compact('artikel'));
     }
 
@@ -386,6 +395,7 @@ class AdminController extends Controller
     public function artikelEdit($id)
     {
         $artikel = Artikel::findOrFail($id);
+
         return view('admin.artikel.edit', compact('artikel'));
     }
 
@@ -395,7 +405,7 @@ class AdminController extends Controller
 
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
-            'slug' => 'required|string|unique:artikel,slug,' . $id,
+            'slug' => 'required|string|unique:artikel,slug,'.$id,
             'konten' => 'required|string',
             'kategori' => 'required|string',
             'gambar' => 'nullable|image|max:2048',
@@ -432,6 +442,7 @@ class AdminController extends Controller
     public function usersIndex()
     {
         $users = User::latest()->paginate(15);
+
         return view('admin.users.index', compact('users'));
     }
 
@@ -459,6 +470,7 @@ class AdminController extends Controller
     public function usersEdit($id)
     {
         $user = User::findOrFail($id);
+
         return view('admin.users.edit', compact('user'));
     }
 
@@ -468,8 +480,8 @@ class AdminController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'username' => 'required|string|unique:users,username,' . $id,
-            'email' => 'required|email|unique:users,email,' . $id,
+            'username' => 'required|string|unique:users,username,'.$id,
+            'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'nullable|string|min:8|confirmed',
         ]);
 

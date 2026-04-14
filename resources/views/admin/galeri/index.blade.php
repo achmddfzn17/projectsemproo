@@ -7,7 +7,7 @@
 <div class="mb-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white shadow-xl">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-            <h1 class="text-4xl font-extrabold mb-2">📷 Galeri</h1>
+            <h1 class="text-4xl font-extrabold mb-2 flex items-center gap-2"><iconify-icon icon="mdi:image-multiple" class="text-2xl"></iconify-icon> Galeri</h1>
             <p class="text-blue-100 text-lg">Dokumentasi foto kegiatan Karang Taruna</p>
         </div>
         <a href="{{ route('admin.galeri.create') }}" class="bg-white text-blue-700 hover:bg-blue-50 rounded-xl px-4 py-2 text-sm font-semibold transition-all inline-flex items-center gap-2">
@@ -59,8 +59,8 @@
     <div class="bg-white rounded-2xl shadow-lg border border-blue-200 overflow-hidden group hover:shadow-xl transition-all">
         <!-- Foto -->
         <div class="relative aspect-square overflow-hidden">
-            @if($item->foto)
-            <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->judul }}"
+            @if($item->foto && file_exists(public_path($item->foto)))
+            <img src="{{ asset($item->foto) }}" alt="{{ $item->judul }}"
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
             @else
             <div class="w-full h-full bg-gray-200 flex items-center justify-center">
@@ -78,15 +78,12 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                     </svg>
                 </a>
-                <form action="{{ route('admin.galeri.destroy', $item->id) }}" method="POST"
-                    onsubmit="return confirm('Yakin hapus foto ini?')">
+                <form id="delete-form-{{ $item->id }}" action="{{ route('admin.galeri.destroy', $item->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit"
-                        class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                        </svg>
+                    <button type="button" onclick="if(confirm('Yakin hapus foto ini?')) document.getElementById('delete-form-{{ $item->id }}').submit();"
+                        class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white transition-colors border border-red-100 shadow-sm">
+                        <iconify-icon icon="mdi:trash-can" class="text-xl"></iconify-icon>
                     </button>
                 </form>
             </div>
@@ -95,7 +92,9 @@
         <!-- Info -->
         <div class="p-4">
             <h3 class="font-bold text-gray-800 mb-1 truncate">{{ $item->judul }}</h3>
-            @if($item->kegiatan)
+            @if($item->nama_kegiatan)
+            <p class="text-xs text-blue-600 mb-2">{{ $item->nama_kegiatan }}</p>
+            @elseif($item->kegiatan)
             <p class="text-xs text-blue-600 mb-2">{{ $item->kegiatan->nama_kegiatan }}</p>
             @endif
             @if($item->deskripsi)

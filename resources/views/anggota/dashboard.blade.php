@@ -5,7 +5,7 @@
 @section('content')
 <!-- Welcome Card -->
 <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl p-8 text-white mb-8 shadow-xl">
-    <h1 class="text-3xl font-black mb-2">Selamat Datang, {{ $anggota->nama }}! 👋</h1>
+    <h1 class="text-3xl font-black mb-2 flex items-center gap-2">Selamat Datang, {{ $anggota->nama }}! <iconify-icon icon="mdi:hand-wave" class="text-3xl"></iconify-icon></h1>
     <p class="text-blue-100">Terima kasih telah menjadi bagian dari Karang Taruna Generasi Emas</p>
 </div>
 
@@ -18,7 +18,7 @@
                 <p class="text-2xl font-black text-green-600">{{ ucfirst($anggota->status) }}</p>
             </div>
             <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                <span class="text-2xl">⭐</span>
+                <iconify-icon icon="mdi:star" class="text-2xl text-green-500"></iconify-icon>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
                 <p class="text-2xl font-black text-blue-600">{{ $anggota->umur }} Th</p>
             </div>
             <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                <span class="text-2xl">🎂</span>
+                <iconify-icon icon="mdi:cake-variant" class="text-2xl text-blue-500"></iconify-icon>
             </div>
         </div>
     </div>
@@ -43,7 +43,7 @@
                 <p class="text-xs text-gray-500 mt-1">{{ $anggota->created_at->format('d M Y') }}</p>
             </div>
             <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                <span class="text-2xl">📅</span>
+                <iconify-icon icon="mdi:calendar" class="text-2xl text-purple-500"></iconify-icon>
             </div>
         </div>
     </div>
@@ -55,7 +55,7 @@
                 <p class="text-2xl font-black text-orange-600">{{ $totalAnggota }}</p>
             </div>
             <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-                <span class="text-2xl">👥</span>
+                <iconify-icon icon="mdi:account-group" class="text-2xl text-orange-500"></iconify-icon>
             </div>
         </div>
     </div>
@@ -64,7 +64,7 @@
 <!-- Achievement Badges -->
 @if(count($badges) > 0)
 <div class="bg-white rounded-2xl shadow-lg p-6 border border-blue-100 mb-8">
-    <h3 class="text-xl font-bold text-gray-800 mb-4">🏆 Achievement & Badges</h3>
+    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><iconify-icon icon="mdi:trophy" class="text-yellow-500"></iconify-icon> Achievement & Badges</h3>
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
         @foreach($badges as $badge)
         <div class="rounded-xl p-4 border-2 text-center
@@ -73,7 +73,7 @@
             @elseif($badge['color'] == 'purple') bg-purple-50 border-purple-200
             @elseif($badge['color'] == 'yellow') bg-yellow-50 border-yellow-200
             @endif">
-            <div class="text-4xl mb-2">{{ $badge['icon'] }}</div>
+            <iconify-icon icon="{{ $badge['icon'] }}" class="text-4xl mb-2 text-{{ $badge['color'] }}-500"></iconify-icon>
             <h4 class="font-bold mb-1
                 @if($badge['color'] == 'blue') text-blue-700
                 @elseif($badge['color'] == 'green') text-green-700
@@ -117,12 +117,12 @@
         </div>
         <div class="mt-4 flex space-x-3">
             <a href="{{ route('anggota.profile') }}" 
-               class="inline-block bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700 transition-all font-semibold">
-                ✏️ Edit Profile
+               class="inline-block bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700 transition-all font-semibold flex items-center gap-2">
+                <iconify-icon icon="mdi:pencil"></iconify-icon> Edit Profile
             </a>
             <a href="{{ route('anggota.export-profile') }}" 
-               class="inline-block bg-green-600 text-white px-6 py-2 rounded-xl hover:bg-green-700 transition-all font-semibold">
-                📥 Export Profile
+               class="inline-block bg-green-600 text-white px-6 py-2 rounded-xl hover:bg-green-700 transition-all font-semibold flex items-center gap-2">
+                <iconify-icon icon="mdi:file-download"></iconify-icon> Export Profile
             </a>
         </div>
     </div>
@@ -134,7 +134,7 @@
             <a href="{{ route('anggota.qr-card') }}" 
                class="block bg-purple-50 hover:bg-purple-100 p-4 rounded-xl border-2 border-purple-200 transition-all">
                 <div class="flex items-center">
-                    <span class="text-3xl mr-3">📱</span>
+                    <iconify-icon icon="mdi:qrcode" class="text-3xl mr-3 text-purple-500"></iconify-icon>
                     <div>
                         <p class="font-bold text-purple-700">Kartu Anggota Digital</p>
                         <p class="text-xs text-purple-600">QR Code & Info</p>
@@ -145,7 +145,7 @@
             <a href="{{ route('kegiatan.index') }}" target="_blank"
                class="block bg-blue-50 hover:bg-blue-100 p-4 rounded-xl border-2 border-blue-200 transition-all">
                 <div class="flex items-center">
-                    <span class="text-3xl mr-3">📅</span>
+                    <iconify-icon icon="mdi:calendar" class="text-3xl mr-3 text-blue-500"></iconify-icon>
                     <div>
                         <p class="font-bold text-blue-700">Lihat Kegiatan</p>
                         <p class="text-xs text-blue-600">{{ $kegiatanBerlangsung }} sedang berlangsung</p>
@@ -156,7 +156,7 @@
             <a href="{{ route('home') }}" target="_blank"
                class="block bg-green-50 hover:bg-green-100 p-4 rounded-xl border-2 border-green-200 transition-all">
                 <div class="flex items-center">
-                    <span class="text-3xl mr-3">🌐</span>
+                    <iconify-icon icon="mdi:web" class="text-3xl mr-3 text-green-500"></iconify-icon>
                     <div>
                         <p class="font-bold text-green-700">Website Utama</p>
                         <p class="text-xs text-green-600">Berita & Artikel</p>
@@ -169,7 +169,7 @@
 
 <!-- Activity Timeline -->
 <div class="bg-white rounded-2xl shadow-lg p-6 border border-blue-100 mb-8">
-    <h3 class="text-xl font-bold text-gray-800 mb-4">📊 Activity Timeline</h3>
+    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><iconify-icon icon="mdi:chart-line" class="text-blue-500"></iconify-icon> Activity Timeline</h3>
     <div class="space-y-4">
         @foreach($activities as $activity)
         <div class="flex items-start">
@@ -179,7 +179,7 @@
                 @elseif($activity['color'] == 'purple') bg-purple-100
                 @elseif($activity['color'] == 'orange') bg-orange-100
                 @endif">
-                <span class="text-xl">{{ $activity['icon'] }}</span>
+                <iconify-icon icon="{{ $activity['icon'] }}" class="text-xl text-{{ $activity['color'] }}-500"></iconify-icon>
             </div>
             <div class="flex-1">
                 <h4 class="font-bold text-gray-800">{{ $activity['title'] }}</h4>
@@ -199,7 +199,10 @@
         <div class="flex items-center justify-between p-4 bg-blue-50 rounded-xl border border-blue-100">
             <div class="flex-1">
                 <h4 class="font-semibold text-gray-800">{{ $kegiatan->nama_kegiatan }}</h4>
-                <p class="text-sm text-gray-600">📅 {{ $kegiatan->tanggal_mulai->format('d M Y') }} • 📍 {{ $kegiatan->lokasi }}</p>
+                <p class="text-sm text-gray-600 flex items-center gap-2">
+                    <iconify-icon icon="mdi:calendar" class="text-blue-500"></iconify-icon> {{ $kegiatan->tanggal_mulai->format('d M Y') }} • 
+                    <iconify-icon icon="mdi:map-marker" class="text-red-500"></iconify-icon> {{ $kegiatan->lokasi }}
+                </p>
             </div>
             <span class="px-3 py-1 bg-blue-600 text-white rounded-lg text-sm font-semibold">
                 {{ ucfirst($kegiatan->jenis_kegiatan) }}

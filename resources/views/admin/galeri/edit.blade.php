@@ -12,7 +12,7 @@
             </svg>
         </a>
         <div>
-            <h1 class="text-4xl font-extrabold mb-2">✏️ Edit Foto</h1>
+            <h1 class="text-4xl font-extrabold mb-2 flex items-center gap-2"><iconify-icon icon="mdi:image-edit" class="text-2xl"></iconify-icon> Edit Foto</h1>
             <p class="text-blue-100 text-lg">Update informasi foto galeri</p>
         </div>
     </div>
@@ -37,18 +37,14 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Kegiatan (Opsional)</label>
-                    <select name="kegiatan_id" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 @error('kegiatan_id') border-red-500 @enderror">
-                        <option value="">-- Tidak terkait kegiatan --</option>
-                        @foreach($kegiatans as $kegiatan)
-                        <option value="{{ $kegiatan->id }}" {{ old('kegiatan_id', $galeri->kegiatan_id) == $kegiatan->id ? 'selected' : '' }}>
-                            {{ $kegiatan->nama_kegiatan }} ({{ $kegiatan->tanggal_mulai->format('d M Y') }})
-                        </option>
-                        @endforeach
-                    </select>
-                    @error('kegiatan_id')
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Kegiatan (Opsional)</label>
+                    <input type="text" name="nama_kegiatan" value="{{ old('nama_kegiatan', $galeri->nama_kegiatan) }}"
+                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('nama_kegiatan') border-red-500 @enderror"
+                        placeholder="Contoh: Kerja Bakti Membersihkan Selokan">
+                    @error('nama_kegiatan')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
+                    <p class="text-gray-500 text-xs mt-1">Isi manual nama kegiatan terkait foto ini</p>
                 </div>
 
                 <div>
@@ -82,8 +78,8 @@
             </div>
 
             <div class="flex gap-3 mt-6">
-                <button type="submit" class="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 px-6 rounded-xl transition-all transform hover:-translate-y-1 shadow-lg">
-                    💾 Simpan Perubahan
+                <button type="submit" class="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 px-6 rounded-xl transition-all transform hover:-translate-y-1 shadow-lg flex items-center justify-center gap-2">
+                    <iconify-icon icon="mdi:content-save" class="text-lg"></iconify-icon> Simpan Perubahan
                 </button>
                 <a href="{{ route('admin.galeri.index') }}" class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-xl transition-all">
                     Batal
@@ -97,7 +93,7 @@
         <h3 class="font-bold text-gray-800 mb-4">Preview Foto</h3>
         <div id="preview-container" class="aspect-square rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 overflow-hidden flex items-center justify-center">
             @if($galeri->foto)
-            <img id="preview-img" src="{{ asset('storage/' . $galeri->foto) }}" alt="{{ $galeri->judul }}" class="w-full h-full object-cover">
+            <img id="preview-img" src="{{ asset($galeri->foto) }}" alt="{{ $galeri->judul }}" class="w-full h-full object-cover">
             @else
             <div class="text-center p-8" id="placeholder">
                 <svg class="w-20 h-20 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

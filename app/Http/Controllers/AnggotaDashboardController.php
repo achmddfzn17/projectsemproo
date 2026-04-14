@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Anggota;
 use App\Models\Kegiatan;
+use App\Models\PendaftaranKegiatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,6 +16,7 @@ class AnggotaDashboardController extends Controller
         if (auth()->guard('anggota')->check()) {
             return redirect()->route('anggota.dashboard');
         }
+
         return view('anggota.login');
     }
 
@@ -30,11 +32,12 @@ class AnggotaDashboardController extends Controller
 
         $credentials = [
             $loginType => $request->login,
-            'password' => $request->password
+            'password' => $request->password,
         ];
 
         if (auth()->guard('anggota')->attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
+
             return redirect()->route('anggota.dashboard')->with('success', 'Selamat datang!');
         }
 
@@ -54,7 +57,7 @@ class AnggotaDashboardController extends Controller
         $kegiatanBerlangsung = Kegiatan::where('status', 'berlangsung')->count();
 
         // Statistik Anggota
-        $totalAnggota = \App\Models\Anggota::where('status', 'aktif')->count();
+        $totalAnggota = Anggota::where('status', 'aktif')->count();
         $lamaBergabung = (int) $anggota->created_at->diffInDays(now());
 
         // Format lama bergabung yang lebih readable
@@ -89,16 +92,19 @@ class AnggotaDashboardController extends Controller
         } elseif ($days == 1) {
             return '1 Hari';
         } elseif ($days < 7) {
-            return $days . ' Hari';
+            return $days.' Hari';
         } elseif ($days < 30) {
             $weeks = floor($days / 7);
-            return $weeks . ' Minggu';
+
+            return $weeks.' Minggu';
         } elseif ($days < 365) {
             $months = floor($days / 30);
-            return $months . ' Bulan';
+
+            return $months.' Bulan';
         } else {
             $years = floor($days / 365);
-            return $years . ' Tahun';
+
+            return $years.' Tahun';
         }
     }
 
@@ -111,9 +117,9 @@ class AnggotaDashboardController extends Controller
         if ($anggota->created_at->diffInDays(now()) < 30) {
             $badges[] = [
                 'name' => 'Member Baru',
-                'icon' => '🌟',
+                'icon' => 'mdi:star',
                 'color' => 'blue',
-                'description' => 'Bergabung kurang dari 30 hari'
+                'description' => 'Bergabung kurang dari 30 hari',
             ];
         }
 
@@ -121,9 +127,9 @@ class AnggotaDashboardController extends Controller
         if ($anggota->status == 'aktif') {
             $badges[] = [
                 'name' => 'Member Aktif',
-                'icon' => '✅',
+                'icon' => 'mdi:check-circle',
                 'color' => 'green',
-                'description' => 'Status keanggotaan aktif'
+                'description' => 'Status keanggotaan aktif',
             ];
         }
 
@@ -131,9 +137,9 @@ class AnggotaDashboardController extends Controller
         if ($anggota->email && $anggota->no_hp && $anggota->alamat) {
             $badges[] = [
                 'name' => 'Profile Lengkap',
-                'icon' => '📋',
+                'icon' => 'mdi:clipboard-check',
                 'color' => 'purple',
-                'description' => 'Semua data profile terisi'
+                'description' => 'Semua data profile terisi',
             ];
         }
 
@@ -141,9 +147,9 @@ class AnggotaDashboardController extends Controller
         if ($anggota->created_at->diffInYears(now()) >= 1) {
             $badges[] = [
                 'name' => 'Veteran',
-                'icon' => '🏆',
+                'icon' => 'mdi:trophy',
                 'color' => 'yellow',
-                'description' => 'Bergabung lebih dari 1 tahun'
+                'description' => 'Bergabung lebih dari 1 tahun',
             ];
         }
 
@@ -157,21 +163,21 @@ class AnggotaDashboardController extends Controller
 
         // Activity: Bergabung
         $activities[] = [
-            'icon' => '🎉',
+            'icon' => 'mdi:party-popper',
             'title' => 'Bergabung dengan Karang Taruna',
             'description' => 'Selamat datang di keluarga besar kami!',
             'time' => $anggota->created_at,
-            'color' => 'blue'
+            'color' => 'blue',
         ];
 
         // Activity: Update Profile (jika ada updated_at berbeda dari created_at)
         if ($anggota->updated_at->gt($anggota->created_at)) {
             $activities[] = [
-                'icon' => '✏️',
+                'icon' => 'mdi:pencil',
                 'title' => 'Memperbarui Profile',
                 'description' => 'Data profile telah diperbarui',
                 'time' => $anggota->updated_at,
-                'color' => 'green'
+                'color' => 'green',
             ];
         }
 
@@ -208,17 +214,18 @@ class AnggotaDashboardController extends Controller
         // Simple HTML to PDF conversion
         $html = view('anggota.profile-pdf', compact('anggota'))->render();
 
-        $filename = 'profile_' . $anggota->nik . '_' . date('Y-m-d') . '.html';
+        $filename = 'profile_'.$anggota->nik.'_'.date('Y-m-d').'.html';
 
         return response($html)
             ->header('Content-Type', 'text/html')
-            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"');
+            ->header('Content-Disposition', 'attachment; filename="'.$filename.'"');
     }
 
     // Profile
     public function profile()
     {
         $anggota = auth()->guard('anggota')->user();
+
         return view('anggota.profile', compact('anggota'));
     }
 
@@ -229,7 +236,7 @@ class AnggotaDashboardController extends Controller
 
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'email' => 'required|email|unique:anggota,email,' . $anggota->id,
+            'email' => 'required|email|unique:anggota,email,'.$anggota->id,
             'no_hp' => 'required|string',
             'alamat' => 'required|string',
             'pendidikan_terakhir' => 'required|string',
@@ -259,12 +266,12 @@ class AnggotaDashboardController extends Controller
 
         $anggota = auth()->guard('anggota')->user();
 
-        if (!Hash::check($request->current_password, $anggota->password)) {
+        if (! Hash::check($request->current_password, $anggota->password)) {
             return back()->withErrors(['current_password' => 'Password lama tidak sesuai']);
         }
 
         $anggota->update([
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
         ]);
 
         return back()->with('success', 'Password berhasil diubah!');
@@ -276,7 +283,7 @@ class AnggotaDashboardController extends Controller
         $anggota = auth()->guard('anggota')->user();
 
         // Ambil riwayat pendaftaran dari model PendaftaranKegiatan yang berelasi dengan email anggota
-        $riwayat = \App\Models\PendaftaranKegiatan::with('kegiatan')
+        $riwayat = PendaftaranKegiatan::with('kegiatan')
             ->where('email', $anggota->email)
             ->latest()
             ->get();

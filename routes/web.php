@@ -6,6 +6,7 @@ use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\PendaftaranKegiatanController;
+use App\Http\Controllers\SusController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -165,4 +166,12 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/galeri/{id}/edit', [GaleriController::class, 'edit'])->name('galeri.edit');
     Route::put('/galeri/{id}', [GaleriController::class, 'update'])->name('galeri.update');
     Route::delete('/galeri/{id}', [GaleriController::class, 'destroy'])->name('galeri.destroy');
+
+    // System Usability Scale (SUS)
+    Route::get('/sus', [SusController::class, 'index'])->name('sus.index');
+    Route::post('/sus', [SusController::class, 'store'])->name('sus.store');
+    Route::get('/sus/hasil/{id}', [SusController::class, 'hasil'])->name('sus.hasil');
+    Route::get('/sus/daftar', [SusController::class, 'daftar'])->name('sus.daftar');
+    Route::delete('/sus/{id}', [SusController::class, 'destroy'])->name('sus.destroy');
+    Route::get('/sus/export-pdf', [SusController::class, 'exportPdf'])->name('sus.export-pdf');
 });

@@ -5,7 +5,7 @@
 @section('content')
 <div class="max-w-4xl mx-auto">
     <div class="mb-6">
-        <h1 class="text-3xl font-bold text-gray-800">📷 Scan QR Check-in</h1>
+        <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2"><iconify-icon icon="mdi:qrcode-scan" class="text-blue-500"></iconify-icon> Scan QR Check-in</h1>
         <p class="text-gray-600 mt-1">Scan QR Code peserta untuk check-in kegiatan</p>
     </div>
 
@@ -15,12 +15,12 @@
         
         <div class="text-center">
             <button id="startBtn" onclick="startScanner()" 
-                    class="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all shadow-lg font-bold text-lg">
-                📷 Mulai Scan
+                    class="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all shadow-lg font-bold text-lg flex items-center gap-2">
+                <iconify-icon icon="mdi:camera" class="text-xl"></iconify-icon> Mulai Scan
             </button>
             <button id="stopBtn" onclick="stopScanner()" style="display:none;"
-                    class="bg-red-600 text-white px-8 py-4 rounded-xl hover:bg-red-700 transition-all shadow-lg font-bold text-lg">
-                ⏹️ Stop Scan
+                    class="bg-red-600 text-white px-8 py-4 rounded-xl hover:bg-red-700 transition-all shadow-lg font-bold text-lg flex items-center gap-2">
+                <iconify-icon icon="mdi:stop" class="text-xl"></iconify-icon> Stop Scan
             </button>
         </div>
     </div>
@@ -70,7 +70,7 @@ function onScanSuccess(decodedText) {
         if (data.success) {
             contentDiv.innerHTML = `
                 <div class="text-center">
-                    <div class="text-6xl mb-4">✅</div>
+                    <iconify-icon icon="mdi:check-circle" class="text-6xl mb-4 text-green-500"></iconify-icon>
                     <h3 class="text-2xl font-bold text-green-600 mb-4">Check-in Berhasil!</h3>
                     <div class="bg-green-50 rounded-xl p-6 text-left">
                         <p class="mb-2"><strong>Nama:</strong> ${data.data.nama_lengkap}</p>
@@ -82,7 +82,7 @@ function onScanSuccess(decodedText) {
         } else {
             contentDiv.innerHTML = `
                 <div class="text-center">
-                    <div class="text-6xl mb-4">❌</div>
+                    <iconify-icon icon="mdi:close-circle" class="text-6xl mb-4 text-red-500"></iconify-icon>
                     <h3 class="text-2xl font-bold text-red-600 mb-4">Check-in Gagal</h3>
                     <p class="text-gray-700">${data.message}</p>
                 </div>

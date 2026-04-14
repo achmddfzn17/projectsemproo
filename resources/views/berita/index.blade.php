@@ -13,7 +13,7 @@
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div class="text-center">
             <div class="inline-flex items-center bg-blue-100 px-4 py-2 rounded-full mb-6">
-                <span class="text-sm font-semibold text-blue-700">📰 Berita Kepemudaan</span>
+                    <span class="text-sm font-semibold text-blue-700 flex items-center gap-1"><iconify-icon icon="mdi:newspaper" class="text-blue-500"></iconify-icon> Berita Kepemudaan</span>
             </div>
             <h1 class="text-5xl md:text-6xl font-extrabold mb-6 text-gray-800">
                 Berita Terbaru
@@ -43,8 +43,8 @@
                 </div>
                 @endif
                 <div class="absolute top-6 left-6">
-                    <span class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-                        ⭐ Berita Utama
+                    <span class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg flex items-center gap-1">
+                        <iconify-icon icon="mdi:star" class="text-yellow-300"></iconify-icon> Berita Utama
                     </span>
                 </div>
             </div>
@@ -110,8 +110,8 @@
                 
                 <!-- Badge -->
                 <div class="absolute top-4 right-4">
-                    <span class="bg-white px-3 py-1 rounded-full text-xs font-bold text-blue-600 shadow-lg">
-                        📰 Berita
+                    <span class="bg-white px-3 py-1 rounded-full text-xs font-bold text-blue-600 shadow-lg flex items-center gap-1">
+                        <iconify-icon icon="mdi:newspaper" class="text-blue-500"></iconify-icon> Berita
                     </span>
                 </div>
             </div>
