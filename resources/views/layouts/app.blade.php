@@ -240,6 +240,10 @@
                         class="px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all {{ request()->routeIs('artikel.*') ? 'bg-blue-50 text-blue-600' : '' }}">
                         📝 Artikel
                     </a>
+                    <a href="{{ route('galeri.index') }}"
+                        class="px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all {{ request()->routeIs('galeri.*') ? 'bg-blue-50 text-blue-600' : '' }}">
+                        📷 Galeri
+                    </a>
 
                     @if(auth()->guard('web')->check())
                         <a href="{{ route('admin.dashboard') }}"
@@ -289,6 +293,9 @@
                 <a href="{{ route('artikel.index') }}"
                     class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-semibold transition">📝
                     Artikel</a>
+                <a href="{{ route('galeri.index') }}"
+                    class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-semibold transition">📷
+                    Galeri</a>
                 @if(auth()->guard('web')->check())
                     <a href="{{ route('admin.dashboard') }}"
                         class="block px-4 py-3 bg-blue-600 text-white rounded-lg font-bold text-center hover:bg-blue-700 transition">⚡
@@ -482,6 +489,9 @@
                         <li><a href="{{ route('artikel.index') }}"
                                 class="text-gray-300 hover:text-blue-400 transition flex items-center"><span
                                     class="mr-2">→</span> Artikel</a></li>
+                        <li><a href="{{ route('galeri.index') }}"
+                                class="text-gray-300 hover:text-blue-400 transition flex items-center"><span
+                                    class="mr-2">→</span> Galeri</a></li>
                     </ul>
                 </div>
 

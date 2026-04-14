@@ -1,8 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AnggotaDashboardController;
+use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KeuanganController;
+use App\Http\Controllers\PendaftaranKegiatanController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -12,6 +18,7 @@ Route::get('/artikel', [HomeController::class, 'artikel'])->name('artikel.index'
 Route::get('/artikel/{slug}', [HomeController::class, 'artikelDetail'])->name('artikel.detail');
 Route::get('/kegiatan', [HomeController::class, 'kegiatan'])->name('kegiatan.index');
 Route::get('/kegiatan/{id}', [HomeController::class, 'kegiatanDetail'])->name('kegiatan.detail');
+Route::get('/galeri', [HomeController::class, 'galeri'])->name('galeri.index');
 Route::get('/tentang', [HomeController::class, 'tentang'])->name('tentang');
 
 // Admin Login Route
@@ -19,7 +26,7 @@ Route::get('/auth', function () {
     return view('auth.login');
 })->name('login')->middleware('guest');
 
-Route::post('/auth', function (\Illuminate\Http\Request $request) {
+Route::post('/auth', function (Request $request) {
     $request->validate([
         'login' => 'required|string',
         'password' => 'required',
@@ -29,11 +36,12 @@ Route::post('/auth', function (\Illuminate\Http\Request $request) {
 
     $credentials = [
         $loginType => $request->login,
-        'password' => $request->password
+        'password' => $request->password,
     ];
 
-    if (\Illuminate\Support\Facades\Auth::attempt($credentials, $request->filled('remember'))) {
+    if (Auth::attempt($credentials, $request->filled('remember'))) {
         $request->session()->regenerate();
+
         return redirect()->intended(route('admin.dashboard'));
     }
 
@@ -42,33 +50,34 @@ Route::post('/auth', function (\Illuminate\Http\Request $request) {
     ])->onlyInput('login');
 })->middleware('guest');
 
-Route::post('/logout', function (\Illuminate\Http\Request $request) {
-    \Illuminate\Support\Facades\Auth::logout();
+Route::post('/logout', function (Request $request) {
+    Auth::logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
+
     return redirect()->route('home');
 })->name('logout');
 
 // Anggota Auth Routes
-Route::get('/anggota/login', [\App\Http\Controllers\AnggotaDashboardController::class, 'loginPage'])->name('anggota.login');
-Route::post('/anggota/login', [\App\Http\Controllers\AnggotaDashboardController::class, 'login'])->name('anggota.login.submit');
+Route::get('/anggota/login', [AnggotaDashboardController::class, 'loginPage'])->name('anggota.login');
+Route::post('/anggota/login', [AnggotaDashboardController::class, 'login'])->name('anggota.login.submit');
 
 // Anggota Dashboard Routes (Protected)
 Route::middleware('anggota.auth')->prefix('anggota')->name('anggota.')->group(function () {
-    Route::get('/dashboard', [\App\Http\Controllers\AnggotaDashboardController::class, 'dashboard'])->name('dashboard');
-    Route::get('/profile', [\App\Http\Controllers\AnggotaDashboardController::class, 'profile'])->name('profile');
-    Route::put('/profile', [\App\Http\Controllers\AnggotaDashboardController::class, 'updateProfile'])->name('profile.update');
-    Route::put('/password', [\App\Http\Controllers\AnggotaDashboardController::class, 'updatePassword'])->name('password.update');
-    Route::get('/riwayat', [\App\Http\Controllers\AnggotaDashboardController::class, 'riwayatKegiatan'])->name('riwayat');
-    Route::get('/qr-card', [\App\Http\Controllers\AnggotaDashboardController::class, 'generateQRCard'])->name('qr-card');
-    Route::get('/export-profile', [\App\Http\Controllers\AnggotaDashboardController::class, 'exportProfile'])->name('export-profile');
-    Route::post('/logout', [\App\Http\Controllers\AnggotaDashboardController::class, 'logout'])->name('logout');
+    Route::get('/dashboard', [AnggotaDashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/profile', [AnggotaDashboardController::class, 'profile'])->name('profile');
+    Route::put('/profile', [AnggotaDashboardController::class, 'updateProfile'])->name('profile.update');
+    Route::put('/password', [AnggotaDashboardController::class, 'updatePassword'])->name('password.update');
+    Route::get('/riwayat', [AnggotaDashboardController::class, 'riwayatKegiatan'])->name('riwayat');
+    Route::get('/qr-card', [AnggotaDashboardController::class, 'generateQRCard'])->name('qr-card');
+    Route::get('/export-profile', [AnggotaDashboardController::class, 'exportProfile'])->name('export-profile');
+    Route::post('/logout', [AnggotaDashboardController::class, 'logout'])->name('logout');
 });
 
 // Pendaftaran Kegiatan (Public)
-Route::get('/kegiatan/{id}/daftar', [\App\Http\Controllers\PendaftaranKegiatanController::class, 'create'])->name('kegiatan.daftar');
-Route::post('/kegiatan/{id}/daftar', [\App\Http\Controllers\PendaftaranKegiatanController::class, 'store'])->name('kegiatan.daftar.store');
-Route::get('/pendaftaran/{id}/success', [\App\Http\Controllers\PendaftaranKegiatanController::class, 'success'])->name('pendaftaran.success');
+Route::get('/kegiatan/{id}/daftar', [PendaftaranKegiatanController::class, 'create'])->name('kegiatan.daftar');
+Route::post('/kegiatan/{id}/daftar', [PendaftaranKegiatanController::class, 'store'])->name('kegiatan.daftar.store');
+Route::get('/pendaftaran/{id}/success', [PendaftaranKegiatanController::class, 'success'])->name('pendaftaran.success');
 
 // Admin Routes (Protected)
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
@@ -91,15 +100,15 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::delete('/kegiatan/{id}', [AdminController::class, 'kegiatanDestroy'])->name('kegiatan.destroy');
 
     // Pendaftaran Kegiatan Management
-    Route::get('/kegiatan/{id}/pendaftaran', [\App\Http\Controllers\PendaftaranKegiatanController::class, 'index'])->name('kegiatan.pendaftaran');
-    Route::post('/pendaftaran/{id}/approve', [\App\Http\Controllers\PendaftaranKegiatanController::class, 'approve'])->name('pendaftaran.approve');
-    Route::post('/pendaftaran/{id}/reject', [\App\Http\Controllers\PendaftaranKegiatanController::class, 'reject'])->name('pendaftaran.reject');
-    Route::post('/pendaftaran/{id}/checkin', [\App\Http\Controllers\PendaftaranKegiatanController::class, 'checkIn'])->name('pendaftaran.checkin');
+    Route::get('/kegiatan/{id}/pendaftaran', [PendaftaranKegiatanController::class, 'index'])->name('kegiatan.pendaftaran');
+    Route::post('/pendaftaran/{id}/approve', [PendaftaranKegiatanController::class, 'approve'])->name('pendaftaran.approve');
+    Route::post('/pendaftaran/{id}/reject', [PendaftaranKegiatanController::class, 'reject'])->name('pendaftaran.reject');
+    Route::post('/pendaftaran/{id}/checkin', [PendaftaranKegiatanController::class, 'checkIn'])->name('pendaftaran.checkin');
 
     // QR Scanner & Absensi
-    Route::get('/kegiatan/scan-qr', [\App\Http\Controllers\PendaftaranKegiatanController::class, 'scanQR'])->name('kegiatan.scan');
-    Route::post('/kegiatan/process-qr', [\App\Http\Controllers\PendaftaranKegiatanController::class, 'processQR'])->name('kegiatan.process-qr');
-    Route::get('/kegiatan/{id}/export-absensi', [\App\Http\Controllers\PendaftaranKegiatanController::class, 'exportAbsensi'])->name('kegiatan.export-absensi');
+    Route::get('/kegiatan/scan-qr', [PendaftaranKegiatanController::class, 'scanQR'])->name('kegiatan.scan');
+    Route::post('/kegiatan/process-qr', [PendaftaranKegiatanController::class, 'processQR'])->name('kegiatan.process-qr');
+    Route::get('/kegiatan/{id}/export-absensi', [PendaftaranKegiatanController::class, 'exportAbsensi'])->name('kegiatan.export-absensi');
 
     // Program
     Route::get('/program', [AdminController::class, 'programIndex'])->name('program.index');
@@ -132,4 +141,28 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/users/{id}/edit', [AdminController::class, 'usersEdit'])->name('users.edit');
     Route::put('/users/{id}', [AdminController::class, 'usersUpdate'])->name('users.update');
     Route::delete('/users/{id}', [AdminController::class, 'usersDestroy'])->name('users.destroy');
+
+    // Keuangan
+    Route::get('/keuangan', [KeuanganController::class, 'index'])->name('keuangan.index');
+    Route::get('/keuangan/masuk', [KeuanganController::class, 'kasMasuk'])->name('keuangan.masuk');
+    Route::post('/keuangan/masuk', [KeuanganController::class, 'storeKasMasuk'])->name('keuangan.store-masuk');
+    Route::get('/keuangan/keluar', [KeuanganController::class, 'kasKeluar'])->name('keuangan.keluar');
+    Route::post('/keuangan/keluar', [KeuanganController::class, 'storeKasKeluar'])->name('keuangan.store-keluar');
+    Route::delete('/keuangan/{id}', [KeuanganController::class, 'destroy'])->name('keuangan.destroy');
+    Route::get('/keuangan/laporan', [KeuanganController::class, 'laporan'])->name('keuangan.laporan');
+    Route::get('/keuangan/export-pdf', [KeuanganController::class, 'exportPdf'])->name('keuangan.export-pdf');
+
+    // Kategori Transaksi
+    Route::get('/keuangan/kategori', [KeuanganController::class, 'kategoriIndex'])->name('keuangan.kategori');
+    Route::post('/keuangan/kategori', [KeuanganController::class, 'kategoriStore'])->name('keuangan.kategori.store');
+    Route::put('/keuangan/kategori/{id}', [KeuanganController::class, 'kategoriUpdate'])->name('keuangan.kategori.update');
+    Route::delete('/keuangan/kategori/{id}', [KeuanganController::class, 'kategoriDestroy'])->name('keuangan.kategori.destroy');
+
+    // Galeri
+    Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');
+    Route::get('/galeri/create', [GaleriController::class, 'create'])->name('galeri.create');
+    Route::post('/galeri', [GaleriController::class, 'store'])->name('galeri.store');
+    Route::get('/galeri/{id}/edit', [GaleriController::class, 'edit'])->name('galeri.edit');
+    Route::put('/galeri/{id}', [GaleriController::class, 'update'])->name('galeri.update');
+    Route::delete('/galeri/{id}', [GaleriController::class, 'destroy'])->name('galeri.destroy');
 });

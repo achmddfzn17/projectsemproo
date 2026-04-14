@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
+use App\Models\Anggota;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
-use App\Models\Anggota;
 
 class UserSeeder extends Seeder
 {
     public function run(): void
     {
         // Create Admin Account (if not exists)
-        if (!User::where('email', 'admin@karangtaruna.id')->exists()) {
+        if (! User::where('email', 'admin@karangtaruna.id')->exists()) {
             User::create([
                 'name' => 'Admin Karang Taruna',
                 'username' => 'admin',
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
         }
 
         // Create Anggota Account (if not exists)
-        if (!Anggota::where('email', 'budi@karangtaruna.id')->exists()) {
+        if (! Anggota::where('email', 'budi@karangtaruna.id')->exists()) {
             Anggota::create([
                 'nama' => 'Budi Santoso',
                 'nik' => '3201012345678901',
@@ -48,7 +48,7 @@ class UserSeeder extends Seeder
         }
 
         // Create Additional Anggota Account (if not exists)
-        if (!Anggota::where('email', 'siti@karangtaruna.id')->exists()) {
+        if (! Anggota::where('email', 'siti@karangtaruna.id')->exists()) {
             Anggota::create([
                 'nama' => 'Siti Nurhaliza',
                 'nik' => '3201012345678902',
@@ -69,9 +69,22 @@ class UserSeeder extends Seeder
             echo "ℹ️  Anggota 2 (Siti) already exists\n";
         }
 
-        echo "✅ Akun berhasil dibuat!\n";
-        echo "\n📋 INFORMASI LOGIN:\n";
-        echo "==========================================\n";
+        echo '✅ Akun berhasil dibuat!'.PHP_EOL;
+        echo PHP_EOL.'📋 INFORMASI LOGIN:'.PHP_EOL;
+        echo '=========================================='.PHP_EOL;
+        echo '🔐 ADMIN:'.PHP_EOL;
+        echo '   Username : admin'.PHP_EOL;
+        echo '   Email    : admin@karangtaruna.id'.PHP_EOL;
+        echo '   Password : admin123'.PHP_EOL;
+        echo PHP_EOL.'👤 ANGGOTA 1:'.PHP_EOL;
+        echo '   Username : budi'.PHP_EOL;
+        echo '   Email    : budi@karangtaruna.id'.PHP_EOL;
+        echo '   Password : anggota123'.PHP_EOL;
+        echo PHP_EOL.'👤 ANGGOTA 2:'.PHP_EOL;
+        echo '   Username : siti'.PHP_EOL;
+        echo '   Email    : siti@karangtaruna.id'.PHP_EOL;
+        echo '   Password : anggota123'.PHP_EOL;
+        echo '=========================================='.PHP_EOL;
         echo "🔐 ADMIN:\n";
         echo "   Username : admin\n";
         echo "   Email    : admin@karangtaruna.id\n";
