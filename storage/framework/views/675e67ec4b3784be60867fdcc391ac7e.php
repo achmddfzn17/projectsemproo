@@ -147,8 +147,8 @@
                         <span class="text-sm text-gray-500"><?php echo e($gradeCounts[$g['grade']]); ?> responden (<?php echo e($totalResponden > 0 ? round(($gradeCounts[$g['grade']] / $totalResponden) * 100, 1) : 0); ?>%)</span>
                     </div>
                     <div class="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
-                        <div class="<?php echo e($g['color']); ?> h-full rounded-full transition-all duration-500 ease-out" 
-                             style="width: <?php echo e($totalResponden > 0 ? ($gradeCounts[$g['grade']] / $maxCount) * 100 : 0); ?>%"></div>
+                        <div class="<?php echo e($g['color']); ?> h-full rounded-full transition-all duration-500 ease-out sus-bar"
+                             data-width="<?php echo e($totalResponden > 0 ? ($gradeCounts[$g['grade']] / $maxCount) * 100 : 0); ?>"></div>
                     </div>
                 </div>
             </div>
@@ -285,6 +285,13 @@
     </div>
     <?php endif; ?>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.sus-bar').forEach(function (el) {
+            el.style.width = el.dataset.width + '%';
+        });
+    });
+</script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\projectsempro\resources\views/admin/sus/daftar.blade.php ENDPATH**/ ?>
