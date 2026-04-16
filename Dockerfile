@@ -8,9 +8,15 @@ RUN apk add --no-cache \
     unzip \
     nodejs \
     npm \
+    sqlite-dev \
     libpng-dev \
+    freetype-dev \
+    libjpeg-turbo-dev \
     libzip-dev \
     oniguruma-dev
+
+# Configure GD extension
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql pdo_sqlite mbstring gd zip
