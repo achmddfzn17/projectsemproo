@@ -29,6 +29,9 @@ WORKDIR /var/www/html
 # Copy project files
 COPY . .
 
+# Create required Laravel directories
+RUN mkdir -p bootstrap/cache storage/framework/sessions storage/framework/views storage/framework/cache storage/logs
+
 # Install PHP dependencies
 RUN composer install --optimize-autoloader --no-dev --no-interaction
 
