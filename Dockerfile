@@ -35,8 +35,8 @@ RUN mkdir -p bootstrap/cache storage/framework/sessions storage/framework/views 
 # Install PHP dependencies
 RUN composer install --optimize-autoloader --no-dev --no-interaction
 
-# Install & build frontend
-RUN npm ci --omit=dev && npm run build
+# Install & build frontend (need devDeps for vite)
+RUN npm ci && npm run build && npm prune --omit=dev
 
 # Cache Laravel config
 RUN php artisan config:cache \
