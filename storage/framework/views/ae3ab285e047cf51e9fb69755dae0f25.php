@@ -128,10 +128,10 @@
                             <a href="<?php echo e(route('admin.kegiatan.edit', $item->id)); ?>" class="bg-blue-50 text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-100 transition font-semibold text-sm">
                                 <iconify-icon icon="mdi:pencil" class="text-sm"></iconify-icon>
                             </a>
-                            <form method="POST" action="<?php echo e(route('admin.kegiatan.destroy', $item->id)); ?>" onsubmit="return confirm('Yakin ingin menghapus kegiatan ini?')">
+                            <form id="delete-form-<?php echo e($item->id); ?>" method="POST" action="<?php echo e(route('admin.kegiatan.destroy', $item->id)); ?>">
                                 <?php echo csrf_field(); ?>
                                 <?php echo method_field('DELETE'); ?>
-                                <button type="submit" class="bg-red-50 text-red-600 px-3 py-2 rounded-lg hover:bg-red-100 transition font-semibold text-sm border border-red-200">
+                                <button type="button" onclick="if(confirm('Yakin ingin menghapus kegiatan ini?')) document.getElementById('delete-form-<?php echo e($item->id); ?>').submit();" class="bg-red-50 text-red-600 px-3 py-2 rounded-lg hover:bg-red-100 transition font-semibold text-sm border border-red-200">
                                     <iconify-icon icon="mdi:trash-can" class="text-sm"></iconify-icon>
                                 </button>
                             </form>
