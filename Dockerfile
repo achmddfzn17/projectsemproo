@@ -38,9 +38,8 @@ RUN composer install --optimize-autoloader --no-dev --no-interaction
 # Install & build frontend (need devDeps for vite)
 RUN npm ci && npm run build && npm prune --omit=dev
 
-# Cache Laravel config
-RUN php artisan config:cache \
-    && php artisan route:cache \
+# Cache Laravel routes and views (Config must be dynamic at runtime)
+RUN php artisan route:cache \
     && php artisan view:cache
 
 # Fix storage permissions
