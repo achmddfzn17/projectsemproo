@@ -29,6 +29,9 @@ WORKDIR /var/www/html
 # Copy project files
 COPY . .
 
+# Clear any local cache files that might have been copied
+RUN rm -rf bootstrap/cache/*.php
+
 # Create required Laravel directories
 RUN mkdir -p bootstrap/cache storage/framework/sessions storage/framework/views storage/framework/cache storage/logs
 
